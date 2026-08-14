@@ -3,198 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu - Bamotra Momo’s Cafe - Vijaypur</title>
+    <title>Bamotra Momo’s Cafe - Online Order</title>
     <style>
         :root {
-            --primary: #1E3F29; /* Dark Vintage Green */
-            --dark: #2C3E50;
-            --light: #FDFEFE;
-            --cream: #FAF3E0; /* Vintage Paper Color */
-            --accent: #B08968; /* Soft Brown/Gold Accents */
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --primary: #e63946;
+            --dark: #1d3557;
+            --light: #f1faee;
+            --accent: #457b9d;
+            --success: #2a9d8f;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Garamond', 'Georgia', serif; }
-        body { background-color: var(--cream); color: var(--primary); }
-        header { 
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
             background-color: var(--primary);
-            height: 35vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            color: var(--light); text-align: center; padding: 20px; 
-            border-bottom: 5px solid var(--accent);
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        header h1 { font-family: 'Niconne', cursive; font-size: 3rem; margin-bottom: 5px; color: var(--light); }
-        header p.location { font-size: 1rem; color: #E0E0E0; margin-top: 10px;}
-        header p.contact { font-size: 1.1rem; color: var(--accent); font-weight: bold; margin-top: 5px; }
 
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
-        
-        .menu-section { background: white; padding: 30px; border-radius: 12px; box-shadow: var(--shadow); border: 2px solid #EAE0C8; }
-        .menu-category-title { 
-            font-family: 'Niconne', cursive; font-size: 2.2rem; 
-            color: var(--primary); text-align: center; 
-            border-bottom: 2px solid var(--accent); padding-bottom: 5px; margin: 30px 0 20px; 
-        }
-        .menu-category-title:first-of-type { margin-top: 0; }
-        
-        .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .menu-item { 
-            background-color: #fbfbfb; border: 1px solid #eee; border-radius: 8px; padding: 15px;
-            display: flex; justify-content: space-between; align-items: center; 
-            transition: all 0.3s ease;
-        }
-        .menu-item:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .item-details h3 { font-size: 1.2rem; font-weight: bold; color: #333; margin-bottom: 2px;}
-        
-        .price-controls { text-align: right; }
-        .price { font-weight: bold; color: var(--primary); font-size: 1.2rem; margin-right: 15px;}
-        .btn-add { background-color: var(--accent); color: white; border: none; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;}
-        .btn-add:hover { background-color: #967056; }
-        
-        .cart-section { background: white; padding: 25px; border-radius: 12px; box-shadow: var(--shadow); height: fit-content; position: sticky; top: 20px; border: 2px solid #EAE0C8; }
-        .cart-section h2 { font-size: 1.8rem; border-bottom: 2px solid var(--accent); padding-bottom: 10px; color: var(--primary); margin-bottom: 20px;}
-        .cart-item { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px;}
-        .cart-item:last-child { border-bottom: none; }
-        .cart-total { border-top: 2px dashed var(--accent); padding-top: 15px; margin-top: 20px; font-weight: bold; display: flex; justify-content: space-between; font-size: 1.3rem;}
-        .btn-checkout { background-color: var(--primary); color: white; border: none; width: 100%; padding: 15px; margin-top: 20px; border-radius: 8px; font-size: 1.2rem; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;}
-        .btn-checkout:hover { background-color: #142a1b; }
+        header h1 { margin: 0 0 5px 0; font-size: 26px; }
+        header p { margin: 3px 0; font-size: 14px; opacity: 0.9; }
 
-        footer { text-align: center; padding: 30px; color: #888; font-size: 0.9rem;}
-        
-        /* Font Loading (for handwritten headers) */
-        @import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .container { grid-template-columns: 2fr 1fr; }
+        }
+
+        .category-title {
+            background-color: var(--dark);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .item-card {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-name { font-weight: 600; font-size: 15px; }
+        .item-price { color: var(--primary); font-weight: bold; margin-top: 4px; }
+
+        .btn-add {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Cart Section */
+        .cart-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .cart-box h2 { margin-top: 0; color: var(--dark); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .cart-controls button {
+            background: #e0e0e0;
+            border: none;
+            padding: 2px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .total-row {
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            border-top: 2px solid #eee;
+            padding-top: 10px;
+        }
+
+        .form-group {
+            margin-top: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .qr-container {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 6px;
+        }
+
+        .qr-container img { max-width: 180px; height: auto; border-radius: 6px; }
+
+        .btn-order {
+            width: 100%;
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        /* Modal / Receipt Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .receipt-header { text-align: center; border-bottom: 1px dashed #aaa; padding-bottom: 10px; }
+        .receipt-body { margin: 15px 0; }
+        .receipt-line { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 5px; }
+
+        .btn-close {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--dark);
+            color: white;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Bamotra Momo’s Cafe</h1>
-        <p class="location">Main Bazar | Vijaypur | Opp. Petrol Pump | NH.44</p>
-        <p class="contact">Mob.: 7051365318, 9596373656, 9697201688</p>
+        <p>Main Bazar | Vijaypur | Opp. Petrol Pump | NH.44</p>
+        <p>Mob.: 7051365318, 9596373656, 9697201688</p>
     </header>
 
     <div class="container">
-        <!-- MENU SECTION -->
-        <div class="menu-section">
-
-            <div class="menu-category-title">Special Veg Momo</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>Steam Momo</h3></div><div class="price-controls"><span class="price">₹60</span><button class="btn-add" onclick="addToCart('Steam Momo', 60)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Fry Momo</h3></div><div class="price-controls"><span class="price">₹70</span><button class="btn-add" onclick="addToCart('Fry Momo', 70)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Kurkure Momo</h3></div><div class="price-controls"><span class="price">₹90</span><button class="btn-add" onclick="addToCart('Kurkure Momo', 90)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Chilli Momo</h3></div><div class="price-controls"><span class="price">₹140</span><button class="btn-add" onclick="addToCart('Chilli Momo', 140)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Malai Momo</h3></div><div class="price-controls"><span class="price">₹150</span><button class="btn-add" onclick="addToCart('Malai Momo', 150)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Masala Momo</h3></div><div class="price-controls"><span class="price">₹150</span><button class="btn-add" onclick="addToCart('Masala Momo', 150)">Add</button></div></div>
+        <!-- Menu Section -->
+        <div>
+            <div class="category-title">Special Veg Momo</div>
+            <div class="menu-grid">
+                <div class="item-card"><div><div class="item-name">Steam Momo</div><div class="item-price">₹60</div></div><button class="btn-add" onclick="addToCart('Steam Momo', 60)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Fry Momo</div><div class="item-price">₹70</div></div><button class="btn-add" onclick="addToCart('Fry Momo', 70)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Kurkure Momo</div><div class="item-price">₹90</div></div><button class="btn-add" onclick="addToCart('Kurkure Momo', 90)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Chilli Momo</div><div class="item-price">₹140</div></div><button class="btn-add" onclick="addToCart('Chilli Momo', 140)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Malai Momo</div><div class="item-price">₹150</div></div><button class="btn-add" onclick="addToCart('Malai Momo', 150)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Masala Momo</div><div class="item-price">₹150</div></div><button class="btn-add" onclick="addToCart('Masala Momo', 150)">+ Add</button></div>
             </div>
 
-            <div class="menu-category-title">Special Paneer Momo</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>Steam Momo (P)</h3></div><div class="price-controls"><span class="price">₹80</span><button class="btn-add" onclick="addToCart('Steam Momo (P)', 80)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Fry Momo (P)</h3></div><div class="price-controls"><span class="price">₹90</span><button class="btn-add" onclick="addToCart('Fry Momo (P)', 90)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Kurkure Momo (P)</h3></div><div class="price-controls"><span class="price">₹110</span><button class="btn-add" onclick="addToCart('Kurkure Momo (P)', 110)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Chilli Momo (P)</h3></div><div class="price-controls"><span class="price">₹160</span><button class="btn-add" onclick="addToCart('Chilli Momo (P)', 160)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Malai Momo (P)</h3></div><div class="price-controls"><span class="price">₹160</span><button class="btn-add" onclick="addToCart('Malai Momo (P)', 160)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Masala Momo (P)</h3></div><div class="price-controls"><span class="price">₹160</span><button class="btn-add" onclick="addToCart('Masala Momo (P)', 160)">Add</button></div></div>
+            <div class="category-title">Special Paneer Momo</div>
+            <div class="menu-grid">
+                <div class="item-card"><div><div class="item-name">Steam Momo (P)</div><div class="item-price">₹80</div></div><button class="btn-add" onclick="addToCart('Steam Momo (P)', 80)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Fry Momo (P)</div><div class="item-price">₹90</div></div><button class="btn-add" onclick="addToCart('Fry Momo (P)', 90)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Kurkure Momo (P)</div><div class="item-price">₹110</div></div><button class="btn-add" onclick="addToCart('Kurkure Momo (P)', 110)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Chilli Momo (P)</div><div class="item-price">₹160</div></div><button class="btn-add" onclick="addToCart('Chilli Momo (P)', 160)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Malai Momo (P)</div><div class="item-price">₹160</div></div><button class="btn-add" onclick="addToCart('Malai Momo (P)', 160)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Masala Momo (P)</div><div class="item-price">₹160</div></div><button class="btn-add" onclick="addToCart('Masala Momo (P)', 160)">+ Add</button></div>
             </div>
 
-            <div class="menu-category-title">Tandoori Champ (4 PM)</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>Malai Champ</h3></div><div class="price-controls"><span class="price">₹170</span><button class="btn-add" onclick="addToCart('Malai Champ', 170)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Tandoori Champ</h3></div><div class="price-controls"><span class="price">₹140</span><button class="btn-add" onclick="addToCart('Tandoori Champ', 140)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Afghani Champ</h3></div><div class="price-controls"><span class="price">₹160</span><button class="btn-add" onclick="addToCart('Afghani Champ', 160)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Lemon Champ</h3></div><div class="price-controls"><span class="price">₹150</span><button class="btn-add" onclick="addToCart('Lemon Champ', 150)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Achari Champ</h3></div><div class="price-controls"><span class="price">₹150</span><button class="btn-add" onclick="addToCart('Achari Champ', 150)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Paneer Tikka</h3></div><div class="price-controls"><span class="price">₹200</span><button class="btn-add" onclick="addToCart('Paneer Tikka', 200)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Mashroom Tikka</h3></div><div class="price-controls"><span class="price">₹180</span><button class="btn-add" onclick="addToCart('Mashroom Tikka', 180)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Veg Momo (Tand.)</h3></div><div class="price-controls"><span class="price">₹150</span><button class="btn-add" onclick="addToCart('Veg Momo (Tand.)', 150)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Paneer Momo (Tand.)</h3></div><div class="price-controls"><span class="price">₹170</span><button class="btn-add" onclick="addToCart('Paneer Momo (Tand.)', 170)">Add</button></div></div>
+            <div class="category-title">Burger & Snacks</div>
+            <div class="menu-grid">
+                <div class="item-card"><div><div class="item-name">Veg Burger</div><div class="item-price">₹50</div></div><button class="btn-add" onclick="addToCart('Veg Burger', 50)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Cheese Burger</div><div class="item-price">₹80</div></div><button class="btn-add" onclick="addToCart('Cheese Burger', 80)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">French Fries</div><div class="item-price">₹90</div></div><button class="btn-add" onclick="addToCart('French Fries', 90)">+ Add</button></div>
+                <div class="item-card"><div><div class="item-name">Peri Peri Fries</div><div class="item-price">₹100</div></div><button class="btn-add" onclick="addToCart('Peri Peri Fries', 100)">+ Add</button></div>
             </div>
-
-            <div class="menu-category-title">Champ</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>Veg Champ</h3></div><div class="price-controls"><span class="price">₹90</span><button class="btn-add" onclick="addToCart('Veg Champ', 90)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Fry Malai Champ</h3></div><div class="price-controls"><span class="price">₹150</span><button class="btn-add" onclick="addToCart('Fry Malai Champ', 150)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Chilli Champ</h3></div><div class="price-controls"><span class="price">₹160</span><button class="btn-add" onclick="addToCart('Chilli Champ', 160)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Masala Champ</h3></div><div class="price-controls"><span class="price">₹170</span><button class="btn-add" onclick="addToCart('Masala Champ', 170)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Honey Chilli Champ</h3></div><div class="price-controls"><span class="price">₹140</span><button class="btn-add" onclick="addToCart('Honey Chilli Champ', 140)">Add</button></div></div>
-            </div>
-
-            <div class="menu-category-title">Dosa</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>Masala Dosa</h3></div><div class="price-controls"><span class="price">₹100</span><button class="btn-add" onclick="addToCart('Masala Dosa', 100)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Paneer Dosa</h3></div><div class="price-controls"><span class="price">₹130</span><button class="btn-add" onclick="addToCart('Paneer Dosa', 130)">Add</button></div></div>
-            </div>
-
-            <div class="menu-category-title">Burger</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>Veg Burger</h3></div><div class="price-controls"><span class="price">₹50</span><button class="btn-add" onclick="addToCart('Veg Burger', 50)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Cheese Burger</h3></div><div class="price-controls"><span class="price">₹80</span><button class="btn-add" onclick="addToCart('Cheese Burger', 80)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Sweet Corn Burger</h3></div><div class="price-controls"><span class="price">₹70</span><button class="btn-add" onclick="addToCart('Sweet Corn Burger', 70)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Desi Style Burger</h3></div><div class="price-controls"><span class="price">₹60</span><button class="btn-add" onclick="addToCart('Desi Style Burger', 60)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Cheese Paneer Burger</h3></div><div class="price-controls"><span class="price">₹100</span><button class="btn-add" onclick="addToCart('Cheese Paneer Burger', 100)">Add</button></div></div>
-            </div>
-
-            <div class="menu-category-title">Fries</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>French Fries</h3></div><div class="price-controls"><span class="price">₹90</span><button class="btn-add" onclick="addToCart('French Fries', 90)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Peri Peri Fries</h3></div><div class="price-controls"><span class="price">₹100</span><button class="btn-add" onclick="addToCart('Peri Peri Fries', 100)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Chilli Potato</h3></div><div class="price-controls"><span class="price">₹140</span><button class="btn-add" onclick="addToCart('Chilli Potato', 140)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Honey Chilli Potato</h3></div><div class="price-controls"><span class="price">₹120</span><button class="btn-add" onclick="addToCart('Honey Chilli Potato', 120)">Add</button></div></div>
-            </div>
-
-            <div class="menu-category-title">Samosa</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>Samosa (1)</h3></div><div class="price-controls"><span class="price">₹40</span><button class="btn-add" onclick="addToCart('Samosa (1)', 40)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Samosa Paneer</h3></div><div class="price-controls"><span class="price">₹60</span><button class="btn-add" onclick="addToCart('Samosa Paneer', 60)">Add</button></div></div>
-            </div>
-            
-            <div class="menu-category-title">Sandwich</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>Veg Sandwich</h3></div><div class="price-controls"><span class="price">₹80</span><button class="btn-add" onclick="addToCart('Veg Sandwich', 80)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Cheese Sandwich</h3></div><div class="price-controls"><span class="price">₹100</span><button class="btn-add" onclick="addToCart('Cheese Sandwich', 100)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Sweet Corn Sandwich</h3></div><div class="price-controls"><span class="price">₹100</span><button class="btn-add" onclick="addToCart('Sweet Corn Sandwich', 100)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Paneer Cheese Sandwich</h3></div><div class="price-controls"><span class="price">₹120</span><button class="btn-add" onclick="addToCart('Paneer Cheese Sandwich', 120)">Add</button></div></div>
-            </div>
-
-            <div class="menu-category-title">Noodles</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>Veg Noodles</h3></div><div class="price-controls"><span class="price">₹80</span><button class="btn-add" onclick="addToCart('Veg Noodles', 80)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Hakka Noodles</h3></div><div class="price-controls"><span class="price">₹120</span><button class="btn-add" onclick="addToCart('Hakka Noodles', 120)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Chilli Garlic Noodles</h3></div><div class="price-controls"><span class="price">₹120</span><button class="btn-add" onclick="addToCart('Chilli Garlic Noodles', 120)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Singa Pori Noodles</h3></div><div class="price-controls"><span class="price">₹140</span><button class="btn-add" onclick="addToCart('Singa Pori Noodles', 140)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Schezwan Noodles</h3></div><div class="price-controls"><span class="price">₹150</span><button class="btn-add" onclick="addToCart('Schezwan Noodles', 150)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Paneer Noodles</h3></div><div class="price-controls"><span class="price">₹100</span><button class="btn-add" onclick="addToCart('Paneer Noodles', 100)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Spring Roll</h3></div><div class="price-controls"><span class="price">₹90</span><button class="btn-add" onclick="addToCart('Spring Roll', 90)">Add</button></div></div>
-            </div>
-
-            <div class="menu-category-title">Rice</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>Veg Fried Rice</h3></div><div class="price-controls"><span class="price">₹100</span><button class="btn-add" onclick="addToCart('Veg Fried Rice', 100)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Jeera Rice</h3></div><div class="price-controls"><span class="price">₹90</span><button class="btn-add" onclick="addToCart('Jeera Rice', 90)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Schezwan Rice</h3></div><div class="price-controls"><span class="price">₹120</span><button class="btn-add" onclick="addToCart('Schezwan Rice', 120)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Veg Pulav Rice</h3></div><div class="price-controls"><span class="price">₹100</span><button class="btn-add" onclick="addToCart('Veg Pulav Rice', 100)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Paneer Fried Rice</h3></div><div class="price-controls"><span class="price">₹120</span><button class="btn-add" onclick="addToCart('Paneer Fried Rice', 120)">Add</button></div></div>
-            </div>
-
-            <div class="menu-category-title">Pasta</div>
-            <div class="items-grid">
-                <div class="menu-item"><div class="item-details"><h3>White Sauce Pasta</h3></div><div class="price-controls"><span class="price">₹150</span><button class="btn-add" onclick="addToCart('White Sauce Pasta', 150)">Add</button></div></div>
-                <div class="menu-item"><div class="item-details"><h3>Red Sauce Pasta</h3></div><div class="price-controls"><span class="price">₹170</span><button class="btn-add" onclick="addToCart('Red Sauce Pasta', 170)">Add</button></div></div>
-            </div>
-
         </div>
 
-        <!-- BASKET / CART SECTION -->
-        <div class="cart-section">
-            <h2>Your Order</h2>
-            <div id="cart-items" style="margin-top: 15px;">
-                <p style="color: #888;">Your basket is empty.</p>
+        <!-- Cart Section -->
+        <div>
+            <div class="cart-box">
+                <h2>Your Basket</h2>
+                <div id="cart-items"><p style="color:#777;">Your cart is empty.</p></div>
+                
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span>₹<span id="cart-total">0</span></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Customer Name *</label>
+                    <input type="text" id="cust-name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Mobile Number *</label>
+                    <input type="tel" id="cust-phone" placeholder="Enter phone number" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="payment-method" onchange="togglePayment(this.value)">
+                        <option value="Pay at Counter">Pay at Counter</option>
+                        <option value="UPI / QR Code">Scan QR & Pay Online</option>
+                    </select>
+                </div>
+
+                <!-- QR Placeholder -->
+                <div class="qr-container" id="qr-box">
+                    <p style="font-size:12px; margin: 0 0 5px 0;">Scan using GPay / PhonePe / Paytm</p>
+                    <p style="font-size:13px; color:#555; border:1px dashed #999; padding:15px; margin:5px 0; background:#fff;">
+                        📱 QR Code photo will be uploaded soon.<br>Please pay at counter or ask for QR code!
+                    </p>
+                </div>
+
+                <button class="btn-order" onclick="placeOrder()">Order on WhatsApp 📲</button>
             </div>
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cart-total-price">₹0</span>
+        </div>
+    </div>
+
+    <!-- Receipt Modal Popup -->
+    <div class="modal" id="receipt-modal">
+        <div class="modal-content">
+            <div class="receipt-header">
+                <h3 style="margin:0;">Bamotra Momo’s Cafe</h3>
+                <p style="margin:2px 0; font-size:12px;">Vijaypur | Mob: 7051365318</p>
+                <h4 id="rec-order-id" style="margin:10px 0 0 0; color:var(--primary);">Order #ORD-101</h4>
+                <p id="rec-date" style="font-size:11px; color:#666; margin:0;"></p>
             </div>
-            <button class="btn-checkout" onclick="checkout()">Place Order</button>
+            <div class="receipt-body">
+                <p><strong>Customer:</strong> <span id="rec-name"></span> (<span id="rec-phone"></span>)</p>
+                <div id="rec-items-list" style="border-bottom: 1px dashed #aaa; padding-bottom: 8px; margin-bottom: 8px;"></div>
+                <div class="receipt-line"><strong>Total Amount:</strong> <strong>₹<span id="rec-total"></span></strong></div>
+                <div class="receipt-line"><span>Payment:</span> <span id="rec-payment"></span></div>
+            </div>
+            <button class="btn-close" onclick="closeReceipt()">Close Receipt</button>
         </div>
     </div>
 
@@ -205,24 +319,37 @@
 
     <script>
         let cart = [];
+        // Direct WhatsApp Number (Country code 91 + 7051365318)
+        const RESTAURANT_WHATSAPP = "917051365318"; 
 
         function addToCart(name, price) {
-            const existingItem = cart.find(item => item.name === name);
-            if (existingItem) {
-                existingItem.quantity += 1;
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
             } else {
-                cart.push({ name, price, quantity: 1 });
+                cart.push({ name, price, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function changeQty(name, delta) {
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.name !== name);
+                }
             }
             updateCartUI();
         }
 
         function updateCartUI() {
             const cartContainer = document.getElementById('cart-items');
-            const totalContainer = document.getElementById('cart-total-price');
+            const totalEl = document.getElementById('cart-total');
             
             if (cart.length === 0) {
-                cartContainer.innerHTML = '<p style="color: #888;">Your basket is empty.</p>';
-                totalContainer.innerText = '₹0';
+                cartContainer.innerHTML = '<p style="color:#777;">Your cart is empty.</p>';
+                totalEl.innerText = '0';
                 return;
             }
 
@@ -230,28 +357,108 @@
             let total = 0;
 
             cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
+                const itemTotal = item.price * item.qty;
                 total += itemTotal;
                 html += `
                     <div class="cart-item">
-                        <span>${item.quantity}x ${item.name}</span>
-                        <span>₹${itemTotal}</span>
+                        <div>
+                            <div><strong>${item.name}</strong></div>
+                            <div style="font-size:12px; color:#666;">₹${item.price} x ${item.qty} = ₹${itemTotal}</div>
+                        </div>
+                        <div class="cart-controls">
+                            <button onclick="changeQty('${item.name}', -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button onclick="changeQty('${item.name}', 1)">+</button>
+                        </div>
                     </div>
                 `;
             });
 
             cartContainer.innerHTML = html;
-            totalContainer.innerText = `₹${total}`;
+            totalEl.innerText = total;
         }
 
-        function checkout() {
+        function togglePayment(val) {
+            document.getElementById('qr-box').style.display = (val === 'UPI / QR Code') ? 'block' : 'none';
+        }
+
+        // Daily Reset Order Sequence Logic
+        function getNextOrderNumber() {
+            const today = new Date().toISOString().slice(0, 10);
+            const storedDate = localStorage.getItem('last_order_date');
+            let orderSeq = parseInt(localStorage.getItem('order_sequence') || '100');
+
+            if (storedDate !== today) {
+                orderSeq = 101;
+                localStorage.setItem('last_order_date', today);
+            } else {
+                orderSeq += 1;
+            }
+
+            localStorage.setItem('order_sequence', orderSeq.toString());
+            return `ORD-${orderSeq}`;
+        }
+
+        function placeOrder() {
             if (cart.length === 0) {
-                alert("Please add items to your basket first!");
+                alert("Please add items to your cart first!");
                 return;
             }
-            alert("Thank you! Your order has been placed. We are preparing it now.");
+
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const payment = document.getElementById('payment-method').value;
+
+            if (!name || !phone) {
+                alert("Please enter your Name and Mobile Number!");
+                return;
+            }
+
+            const orderId = getNextOrderNumber();
+            const total = document.getElementById('cart-total').innerText;
+            const orderDate = new Date().toLocaleString();
+
+            // Formatted WhatsApp Message
+            let waText = `*NEW ORDER - ${orderId}*\n`;
+            waText += `---------------------------\n`;
+            waText += `*Customer:* ${name}\n`;
+            waText += `*Phone:* ${phone}\n`;
+            waText += `*Payment:* ${payment}\n`;
+            waText += `---------------------------\n`;
+            waText += `*Items Ordered:*\n`;
+
+            let receiptItemsHtml = '';
+            cart.forEach((item, index) => {
+                waText += `${index + 1}. ${item.name} x ${item.qty} = ₹${item.price * item.qty}\n`;
+                receiptItemsHtml += `<div class="receipt-line"><span>${item.name} x ${item.qty}</span><span>₹${item.price * item.qty}</span></div>`;
+            });
+
+            waText += `---------------------------\n`;
+            waText += `*Total Amount:* ₹${total}\n\n`;
+            waText += `Please accept & confirm order processing time!`;
+
+            const waUrl = `https://wa.me/${RESTAURANT_WHATSAPP}?text=${encodeURIComponent(waText)}`;
+
+            // Render Digital Receipt
+            document.getElementById('rec-order-id').innerText = orderId;
+            document.getElementById('rec-date').innerText = orderDate;
+            document.getElementById('rec-name').innerText = name;
+            document.getElementById('rec-phone').innerText = phone;
+            document.getElementById('rec-total').innerText = total;
+            document.getElementById('rec-payment').innerText = payment;
+            document.getElementById('rec-items-list').innerHTML = receiptItemsHtml;
+
+            document.getElementById('receipt-modal').style.display = 'flex';
+
+            window.open(waUrl, '_blank');
+        }
+
+        function closeReceipt() {
+            document.getElementById('receipt-modal').style.display = 'none';
             cart = [];
             updateCartUI();
+            document.getElementById('cust-name').value = '';
+            document.getElementById('cust-phone').value = '';
         }
     </script>
 </body>
