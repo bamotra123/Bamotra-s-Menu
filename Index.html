@@ -127,7 +127,7 @@
             font-weight: 600;
             white-space: nowrap;
             cursor: pointer;
-            transition: all 0.25 ease;
+            transition: all 0.25s ease;
         }
 
         .cat-btn.active {
@@ -397,22 +397,22 @@
     <!-- Category Filter Bar -->
     <div class="category-wrapper">
         <div class="category-scroll">
-            <button class="cat-btn active" onclick="filterMenu('all')">All</button>
-            <button class="cat-btn" onclick="filterMenu('veg-momo')">Veg Momos</button>
-            <button class="cat-btn" onclick="filterMenu('paneer-momo')">Paneer Momos</button>
-            <button class="cat-btn" onclick="filterMenu('noodles')">Noodles</button>
-            <button class="cat-btn" onclick="filterMenu('burger')">Burgers</button>
-            <button class="cat-btn" onclick="filterMenu('pasta')">Pasta</button>
-            <button class="cat-btn" onclick="filterMenu('fries')">Fries</button>
-            <button class="cat-btn" onclick="filterMenu('champ')">Champ</button>
-            <button class="cat-btn" onclick="filterMenu('tandoori-champ')">Tandoori Champ</button>
-            <button class="cat-btn" onclick="filterMenu('dosa')">Dosa</button>
-            <button class="cat-btn" onclick="filterMenu('sandwich')">Sandwich</button>
-            <button class="cat-btn" onclick="filterMenu('manchurian')">Manchurian</button>
-            <button class="cat-btn" onclick="filterMenu('mushroom')">Mushroom/Paneer</button>
-            <button class="cat-btn" onclick="filterMenu('soup')">Soup</button>
-            <button class="cat-btn" onclick="filterMenu('rice')">Rice</button>
-            <button class="cat-btn" onclick="filterMenu('snacks')">Snacks</button>
+            <button class="cat-btn active" onclick="filterMenu('all', event)">All</button>
+            <button class="cat-btn" onclick="filterMenu('veg-momo', event)">Veg Momos</button>
+            <button class="cat-btn" onclick="filterMenu('paneer-momo', event)">Paneer Momos</button>
+            <button class="cat-btn" onclick="filterMenu('noodles', event)">Noodles</button>
+            <button class="cat-btn" onclick="filterMenu('burger', event)">Burgers</button>
+            <button class="cat-btn" onclick="filterMenu('pasta', event)">Pasta</button>
+            <button class="cat-btn" onclick="filterMenu('fries', event)">Fries</button>
+            <button class="cat-btn" onclick="filterMenu('champ', event)">Champ</button>
+            <button class="cat-btn" onclick="filterMenu('tandoori-champ', event)">Tandoori Champ</button>
+            <button class="cat-btn" onclick="filterMenu('dosa', event)">Dosa</button>
+            <button class="cat-btn" onclick="filterMenu('sandwich', event)">Sandwich</button>
+            <button class="cat-btn" onclick="filterMenu('manchurian', event)">Manchurian</button>
+            <button class="cat-btn" onclick="filterMenu('mushroom', event)">Mushroom/Paneer</button>
+            <button class="cat-btn" onclick="filterMenu('soup', event)">Soup</button>
+            <button class="cat-btn" onclick="filterMenu('rice', event)">Rice</button>
+            <button class="cat-btn" onclick="filterMenu('snacks', event)">Snacks</button>
         </div>
     </div>
 
@@ -1157,10 +1157,12 @@
             }
         }
 
-        function filterMenu(category) {
+        function filterMenu(category, e) {
             const buttons = document.querySelectorAll('.cat-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (e && e.target) {
+                e.target.classList.add('active');
+            }
 
             const cards = document.querySelectorAll('.menu-card');
             cards.forEach(card => {
@@ -1182,6 +1184,29 @@
                 return;
             }
 
+            // Format customer phone number for direct WhatsApp replies
+            let cleanPhone = phone.replace(/[^0-9]/g, '');
+            if (cleanPhone.length === 10) {
+                cleanPhone = `91${cleanPhone}`;
+            }
+
+            let grandTotal = 0;
+            let orderItemsText = "";
+            
+            for (let item in cart) {
+                let itemTotal = cart[item].qty * cart[item].price;
+                grandTotal += itemTotal;
+                orderItemsText += `• ${item} x ${cart[item].qty} = ₹${itemTotal}\n`;
+            }
+
+            // Messages for One-Touch Cafe Confirmation
+            const confirmMsg = encodeURIComponent(`Hi ${name}, your order from Bamotra Momo's Cafe is CONFIRMED! 🟢\nEstimated prep time: 20-25 mins. Thank you!`);
+            const readyMsg = encodeURIComponent(`Hi ${name}, your order is READY! 🥟🔥 Please collect it / prepare for delivery. Enjoy!`);
+
+            // Quick reply action links
+            const confirmLink = `https://wa.me/${cleanPhone}?text=${confirmMsg}`;
+            const readyLink = `https://wa.me/${cleanPhone}?text=${readyMsg}`;
+
             let orderText = `📩 *NEW ORDER - BAMOTRA MOMO'S CAFE*\n`;
             orderText += `---------------------------\n`;
             orderText += `👤 *Customer:* ${name}\n`;
@@ -1189,19 +1214,16 @@
             orderText += `💳 *Payment:* ${payMethod}\n`;
             orderText += `---------------------------\n`;
             orderText += `🛒 *Items Ordered:*\n`;
-
-            let grandTotal = 0;
-            for (let item in cart) {
-                let itemTotal = cart[item].qty * cart[item].price;
-                grandTotal += itemTotal;
-                orderText += `• ${item} x ${cart[item].qty} = ₹${itemTotal}\n`;
-            }
-
+            orderText += orderItemsText;
             orderText += `---------------------------\n`;
-            orderText += `💰 *Total Amount:* ₹${grandTotal}\n\n`;
-            orderText += `*Please accept & confirm order processing time!*`;
+            orderText += `💰 *Total Amount:* ₹${grandTotal}\n`;
+            orderText += `---------------------------\n`;
+            orderText += `⚡ *ONE-TOUCH CAFE ACTIONS:*\n\n`;
+            orderText += `1️⃣ *Confirm Order (20-25 mins):*\n${confirmLink}\n\n`;
+            orderText += `2️⃣ *Order Ready Notification:*\n${readyLink}`;
 
-            const cafeWhatsAppNumber = "917051365318";
+            // Cafe WhatsApp Number (Test: +44 7785112071)
+            const cafeWhatsAppNumber = "447785112071";
             const encodedMessage = encodeURIComponent(orderText);
             window.location.href = `https://wa.me/${cafeWhatsAppNumber}?text=${encodedMessage}`;
         }
