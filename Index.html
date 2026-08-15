@@ -9,12 +9,13 @@
     <style>
         :root {
             --primary: #E63946;
-            --dark: #111111;
+            --primary-hover: #D62839;
+            --dark: #0F0F0F;
             --card-bg: #FFFFFF;
-            --bg: #F4F5F7;
-            --text-main: #2B2D42;
-            --text-muted: #6C757D;
-            --veg: #2B9348;
+            --bg: #F8F9FA;
+            --text-main: #1D2129;
+            --text-muted: #65676B;
+            --veg: #2E7D32;
         }
 
         * {
@@ -31,42 +32,67 @@
             padding-bottom: 100px;
         }
 
-        /* Hero Header */
+        /* Hero Header with Dark Food Background */
         .hero-header {
-            background: linear-gradient(180deg, #000000 0%, #1A1A1A 100%);
+            position: relative;
+            background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(15,15,15,0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
             color: #FFFFFF;
-            padding: 25px 20px 20px;
+            padding: 35px 20px 25px;
             text-align: center;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .hero-logo-badge {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #000;
+            border: 3px solid var(--primary);
+            margin: 0 auto 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-logo-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .hero-badge {
             display: inline-block;
-            background: rgba(43, 147, 72, 0.2);
-            color: #52B788;
-            padding: 4px 12px;
+            background: rgba(46, 125, 50, 0.25);
+            color: #4CAF50;
+            padding: 4px 14px;
             border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.72rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
-            border: 1px solid rgba(43, 147, 72, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.4);
+            backdrop-filter: blur(4px);
         }
 
         .hero-header h1 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             color: #FFFFFF;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .hero-header p {
             font-size: 0.85rem;
-            color: #CCCCCC;
+            color: #E0E0E0;
             margin-top: 4px;
+            font-weight: 500;
         }
 
         /* Sticky Filter Bar */
@@ -74,14 +100,15 @@
             position: sticky;
             top: 0;
             z-index: 99;
-            background: var(--bg);
-            padding: 12px 16px;
-            backdrop-filter: blur(8px);
+            background: rgba(248, 249, 250, 0.95);
+            padding: 14px 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
         .category-scroll {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             overflow-x: auto;
             scrollbar-width: none;
         }
@@ -91,25 +118,25 @@
         }
 
         .cat-btn {
-            background: #E2E8F0;
+            background: #EAECEF;
             color: var(--text-main);
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 9px 18px;
+            border-radius: 25px;
             font-size: 0.82rem;
             font-weight: 600;
             white-space: nowrap;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25 ease;
         }
 
         .cat-btn.active {
             background: var(--primary);
             color: #FFFFFF;
-            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.35);
         }
 
-        /* Container & Grid */
+        /* Container & Cards */
         .container {
             padding: 10px 16px;
             max-width: 600px;
@@ -117,35 +144,58 @@
         }
 
         .section-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin: 20px 0 10px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin: 24px 0 14px;
             color: var(--dark);
-            border-bottom: 2px solid #E2E8F0;
-            padding-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .menu-card {
             background: var(--card-bg);
-            border-radius: 14px;
-            padding: 14px;
-            margin-bottom: 10px;
+            border-radius: 18px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-            border: 1px solid #EAEAEA;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+            border: 1px solid #EFF1F3;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-card:active {
+            transform: scale(0.98);
+        }
+
+        .item-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .item-img {
+            width: 65px;
+            height: 65px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            background: #F1F3F5;
+            flex-shrink: 0;
         }
 
         .item-details {
             flex: 1;
-            padding-right: 12px;
         }
 
         /* Pure Veg Indicator */
         .food-type {
-            width: 12px;
-            height: 12px;
+            width: 13px;
+            height: 13px;
             border-radius: 3px;
             display: flex;
             align-items: center;
@@ -163,32 +213,34 @@
         }
 
         .item-title {
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             font-weight: 700;
             color: var(--dark);
+            line-height: 1.3;
         }
 
         .item-price {
-            font-size: 0.92rem;
-            font-weight: 700;
+            font-size: 0.95rem;
+            font-weight: 800;
             color: var(--primary);
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
         .add-btn {
             background: #FFF0F1;
             color: var(--primary);
             border: 1.5px solid var(--primary);
-            padding: 6px 16px;
-            border-radius: 8px;
-            font-size: 0.82rem;
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(230, 57, 70, 0.1);
         }
 
         .add-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.92);
             background: var(--primary);
             color: #FFFFFF;
         }
@@ -196,60 +248,63 @@
         /* Floating Basket Bar */
         .basket-bar {
             position: fixed;
-            bottom: 16px;
+            bottom: 18px;
             left: 16px;
             right: 16px;
             max-width: 568px;
             margin: 0 auto;
-            background: var(--dark);
+            background: #111111;
             color: #FFFFFF;
             padding: 12px 20px;
-            border-radius: 16px;
+            border-radius: 18px;
             display: none;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
             z-index: 100;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .basket-info h4 {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             font-weight: 700;
         }
 
         .basket-info p {
             font-size: 0.75rem;
-            color: #AAAAAA;
+            color: #BBBBBB;
         }
 
         .view-cart-btn {
             background: var(--primary);
             color: #FFFFFF;
             border: none;
-            padding: 10px 16px;
-            border-radius: 10px;
+            padding: 10px 18px;
+            border-radius: 12px;
             font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
         }
 
         /* Cart Overlay Drawer */
         .cart-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.65);
             display: none;
             justify-content: flex-end;
             flex-direction: column;
             z-index: 101;
+            backdrop-filter: blur(4px);
         }
 
         .cart-content {
             background: #FFFFFF;
-            border-top-left-radius: 24px;
-            border-top-right-radius: 24px;
+            border-top-left-radius: 26px;
+            border-top-right-radius: 26px;
             padding: 24px 20px 30px;
-            max-height: 80vh;
+            max-height: 82vh;
             overflow-y: auto;
         }
 
@@ -270,23 +325,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .qty-controls {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background: #F1F3F5;
-            padding: 4px 10px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 10px;
         }
 
         .qty-btn {
             background: none;
             border: none;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--dark);
             cursor: pointer;
         }
@@ -305,8 +360,8 @@
 
         .input-group input, .input-group select {
             width: 100%;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 10px;
             border: 1px solid #DDDDDD;
             font-size: 0.88rem;
             outline: none;
@@ -317,12 +372,13 @@
             background: #25D366;
             color: #FFFFFF;
             border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 0.95rem;
+            padding: 15px;
+            border-radius: 14px;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             margin-top: 10px;
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
         }
     </style>
 </head>
@@ -330,6 +386,9 @@
 
     <!-- Header -->
     <div class="hero-header">
+        <div class="hero-logo-badge">
+            <img src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=200&q=80" alt="Cafe Logo">
+        </div>
         <span class="hero-badge">🟢 100% PURE VEG</span>
         <h1>BAMOTRA MOMO'S CAFE</h1>
         <p>Good Food • Good Mood</p>
@@ -353,7 +412,7 @@
             <button class="cat-btn" onclick="filterMenu('mushroom')">Mushroom/Paneer</button>
             <button class="cat-btn" onclick="filterMenu('soup')">Soup</button>
             <button class="cat-btn" onclick="filterMenu('rice')">Rice</button>
-            <button class="cat-btn" onclick="filterMenu('snacks')">Samosa/Tikki/Pakoda</button>
+            <button class="cat-btn" onclick="filterMenu('snacks')">Snacks</button>
         </div>
     </div>
 
@@ -364,27 +423,50 @@
         <div class="section-title">🥟 Special Veg Momos</div>
 
         <div class="menu-card" data-category="veg-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Steam Veg Momo</div><div class="item-price">₹60</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Steam Veg Momo</div><div class="item-price">₹60</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Steam Veg Momo', 60)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="veg-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Fry Veg Momo</div><div class="item-price">₹70</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Fry Veg Momo</div><div class="item-price">₹70</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Fry Veg Momo', 70)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="veg-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Kurkure Veg Momo</div><div class="item-price">₹90</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Kurkure Veg Momo</div><div class="item-price">₹90</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Kurkure Veg Momo', 90)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="veg-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Veg Momo</div><div class="item-price">₹140</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Veg Momo</div><div class="item-price">₹140</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Chilli Veg Momo', 140)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="veg-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Malai Veg Momo</div><div class="item-price">₹150</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Malai Veg Momo</div><div class="item-price">₹150</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Malai Veg Momo', 150)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="veg-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Veg Momo</div><div class="item-price">₹150</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Veg Momo</div><div class="item-price">₹150</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Masala Veg Momo', 150)">+ ADD</button>
         </div>
 
@@ -392,27 +474,50 @@
         <div class="section-title">🥟 Special Paneer Momos</div>
 
         <div class="menu-card" data-category="paneer-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Steam Paneer Momo</div><div class="item-price">₹80</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Steam Paneer Momo</div><div class="item-price">₹80</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Steam Paneer Momo', 80)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="paneer-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Fry Paneer Momo</div><div class="item-price">₹90</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Fry Paneer Momo</div><div class="item-price">₹90</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Fry Paneer Momo', 90)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="paneer-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Kurkure Paneer Momo</div><div class="item-price">₹110</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Kurkure Paneer Momo</div><div class="item-price">₹110</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Kurkure Paneer Momo', 110)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="paneer-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Paneer Momo</div><div class="item-price">₹160</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Paneer Momo</div><div class="item-price">₹160</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Chilli Paneer Momo', 160)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="paneer-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Malai Paneer Momo</div><div class="item-price">₹160</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Malai Paneer Momo</div><div class="item-price">₹160</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Malai Paneer Momo', 160)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="paneer-momo">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Paneer Momo</div><div class="item-price">₹160</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Momos">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Paneer Momo</div><div class="item-price">₹160</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Masala Paneer Momo', 160)">+ ADD</button>
         </div>
 
@@ -420,55 +525,101 @@
         <div class="section-title">🍜 Noodles</div>
 
         <div class="menu-card" data-category="noodles">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Noodles</div><div class="item-price">₹80</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Noodles">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Noodles</div><div class="item-price">₹80</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Veg Noodles', 80)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="noodles">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Hakka Noodles</div><div class="item-price">₹120</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Noodles">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Hakka Noodles</div><div class="item-price">₹120</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Hakka Noodles', 120)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="noodles">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Garlic Noodles</div><div class="item-price">₹120</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Noodles">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Garlic Noodles</div><div class="item-price">₹120</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Chilli Garlic Noodles', 120)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="noodles">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Singa Pori Noodles</div><div class="item-price">₹140</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Noodles">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Singa Pori Noodles</div><div class="item-price">₹140</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Singa Pori Noodles', 140)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="noodles">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Schezwan Noodles</div><div class="item-price">₹150</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Noodles">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Schezwan Noodles</div><div class="item-price">₹150</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Schezwan Noodles', 150)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="noodles">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Noodles</div><div class="item-price">₹100</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Noodles">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Noodles</div><div class="item-price">₹100</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Paneer Noodles', 100)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="noodles">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Spring Roll</div><div class="item-price">₹90</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Spring Roll">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Spring Roll</div><div class="item-price">₹90</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Spring Roll', 90)">+ ADD</button>
         </div>
 
         <!-- BURGER -->
-        <div class="section-title">🍔 Burger</div>
+        <div class="section-title">🍔 Burgers</div>
 
         <div class="menu-card" data-category="burger">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Burger</div><div class="item-price">₹50</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Burger">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Burger</div><div class="item-price">₹50</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Veg Burger', 50)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="burger">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Cheese Burger</div><div class="item-price">₹80</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Burger">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Cheese Burger</div><div class="item-price">₹80</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Cheese Burger', 80)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="burger">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Sweet Corn Burger</div><div class="item-price">₹70</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Burger">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Sweet Corn Burger</div><div class="item-price">₹70</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Sweet Corn Burger', 70)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="burger">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Desi Style Burger</div><div class="item-price">₹60</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Burger">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Desi Style Burger</div><div class="item-price">₹60</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Desi Style Burger', 60)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="burger">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Cheese Paneer Burger</div><div class="item-price">₹100</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Burger">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Cheese Paneer Burger</div><div class="item-price">₹100</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Cheese Paneer Burger', 100)">+ ADD</button>
         </div>
 
@@ -476,11 +627,18 @@
         <div class="section-title">🍝 Pasta</div>
 
         <div class="menu-card" data-category="pasta">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">White Sauce Pasta</div><div class="item-price">₹150</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281286?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Pasta">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">White Sauce Pasta</div><div class="item-price">₹150</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('White Sauce Pasta', 150)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="pasta">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Red Sauce Pasta</div><div class="item-price">₹170</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281286?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Pasta">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Red Sauce Pasta</div><div class="item-price">₹170</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Red Sauce Pasta', 170)">+ ADD</button>
         </div>
 
@@ -488,99 +646,152 @@
         <div class="section-title">🍟 Fries</div>
 
         <div class="menu-card" data-category="fries">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">French Fries</div><div class="item-price">₹90</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Fries">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">French Fries</div><div class="item-price">₹90</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('French Fries', 90)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="fries">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Peri Peri Fries</div><div class="item-price">₹100</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Fries">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Peri Peri Fries</div><div class="item-price">₹100</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Peri Peri Fries', 100)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="fries">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Potato</div><div class="item-price">₹140</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Potato">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Potato</div><div class="item-price">₹140</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Chilli Potato', 140)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="fries">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Honey Chilli Potato</div><div class="item-price">₹120</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Potato">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Honey Chilli Potato</div><div class="item-price">₹120</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Honey Chilli Potato', 120)">+ ADD</button>
-        </div>
-
-        <!-- MANCHURIAN -->
-        <div class="section-title">🧆 Manchurian</div>
-
-        <div class="menu-card" data-category="manchurian">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Manchurian Gravy</div><div class="item-price">₹150</div></div>
-            <button class="add-btn" onclick="addToCart('Veg Manchurian Gravy', 150)">+ ADD</button>
-        </div>
-        <div class="menu-card" data-category="manchurian">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Manchurian Dry</div><div class="item-price">₹120</div></div>
-            <button class="add-btn" onclick="addToCart('Veg Manchurian Dry', 120)">+ ADD</button>
-        </div>
-        <div class="menu-card" data-category="manchurian">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Manchurian</div><div class="item-price">₹180</div></div>
-            <button class="add-btn" onclick="addToCart('Paneer Manchurian', 180)">+ ADD</button>
         </div>
 
         <!-- CHAMP -->
         <div class="section-title">🍲 Champ</div>
 
         <div class="menu-card" data-category="champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Champ</div><div class="item-price">₹90</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Champ">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Champ</div><div class="item-price">₹90</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Veg Champ', 90)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Fry Malai Champ</div><div class="item-price">₹150</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Champ">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Fry Malai Champ</div><div class="item-price">₹150</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Fry Malai Champ', 150)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Champ</div><div class="item-price">₹160</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Champ">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Champ</div><div class="item-price">₹160</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Chilli Champ', 160)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Champ</div><div class="item-price">₹170</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Champ">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Champ</div><div class="item-price">₹170</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Masala Champ', 170)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Honey Chilli Champ</div><div class="item-price">₹140</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Champ">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Honey Chilli Champ</div><div class="item-price">₹140</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Honey Chilli Champ', 140)">+ ADD</button>
         </div>
 
-        <!-- TANDOORI CHAMP (4 PM) -->
+        <!-- TANDOORI CHAMP -->
         <div class="section-title">🍢 Tandoori Champ (4 PM)</div>
 
         <div class="menu-card" data-category="tandoori-champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Malai Champ</div><div class="item-price">₹170</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tikka">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Malai Champ</div><div class="item-price">₹170</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Malai Champ', 170)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="tandoori-champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Tandoori Champ</div><div class="item-price">₹140</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tikka">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Tandoori Champ</div><div class="item-price">₹140</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Tandoori Champ', 140)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="tandoori-champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Afghani Champ</div><div class="item-price">₹160</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tikka">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Afghani Champ</div><div class="item-price">₹160</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Afghani Champ', 160)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="tandoori-champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Lemon Champ</div><div class="item-price">₹150</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tikka">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Lemon Champ</div><div class="item-price">₹150</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Lemon Champ', 150)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="tandoori-champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Achari Champ</div><div class="item-price">₹150</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tikka">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Achari Champ</div><div class="item-price">₹150</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Achari Champ', 150)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="tandoori-champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Tikka</div><div class="item-price">₹200</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tikka">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Tikka</div><div class="item-price">₹200</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Paneer Tikka', 200)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="tandoori-champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Mashroom Tikka</div><div class="item-price">₹180</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tikka">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Mashroom Tikka</div><div class="item-price">₹180</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Mashroom Tikka', 180)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="tandoori-champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg. Momo (Tandoori)</div><div class="item-price">₹150</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tandoori Momo">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg. Momo (Tandoori)</div><div class="item-price">₹150</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Veg. Momo (Tandoori)', 150)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="tandoori-champ">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Momo (Tandoori)</div><div class="item-price">₹170</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tandoori Momo">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Momo (Tandoori)</div><div class="item-price">₹170</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Paneer Momo (Tandoori)', 170)">+ ADD</button>
         </div>
 
@@ -588,11 +799,18 @@
         <div class="section-title">🥞 Dosa</div>
 
         <div class="menu-card" data-category="dosa">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Dosa</div><div class="item-price">₹100</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Dosa">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Dosa</div><div class="item-price">₹100</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Masala Dosa', 100)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="dosa">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Dosa</div><div class="item-price">₹130</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Dosa">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Dosa</div><div class="item-price">₹130</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Paneer Dosa', 130)">+ ADD</button>
         </div>
 
@@ -600,43 +818,104 @@
         <div class="section-title">🥪 Sandwich</div>
 
         <div class="menu-card" data-category="sandwich">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Sandwich</div><div class="item-price">₹80</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Sandwich">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Sandwich</div><div class="item-price">₹80</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Veg Sandwich', 80)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="sandwich">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Cheese Sandwich</div><div class="item-price">₹100</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Sandwich">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Cheese Sandwich</div><div class="item-price">₹100</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Cheese Sandwich', 100)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="sandwich">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Sweet Corn Sandwich</div><div class="item-price">₹100</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Sandwich">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Sweet Corn Sandwich</div><div class="item-price">₹100</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Sweet Corn Sandwich', 100)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="sandwich">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Cheese Sandwich</div><div class="item-price">₹120</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Sandwich">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Cheese Sandwich</div><div class="item-price">₹120</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Paneer Cheese Sandwich', 120)">+ ADD</button>
+        </div>
+
+        <!-- MANCHURIAN -->
+        <div class="section-title">🧆 Manchurian</div>
+
+        <div class="menu-card" data-category="manchurian">
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Manchurian">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Manchurian Gravy</div><div class="item-price">₹150</div></div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Veg Manchurian Gravy', 150)">+ ADD</button>
+        </div>
+
+        <div class="menu-card" data-category="manchurian">
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Manchurian">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Manchurian Dry</div><div class="item-price">₹120</div></div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Veg Manchurian Dry', 120)">+ ADD</button>
+        </div>
+
+        <div class="menu-card" data-category="manchurian">
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Manchurian">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Manchurian</div><div class="item-price">₹180</div></div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Paneer Manchurian', 180)">+ ADD</button>
         </div>
 
         <!-- MUSHROOM & PANEER -->
         <div class="section-title">🍄 Mushroom & Paneer</div>
 
         <div class="menu-card" data-category="mushroom">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Mashroom</div><div class="item-price">₹180</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Paneer">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Mashroom</div><div class="item-price">₹180</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Chilli Mashroom', 180)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="mushroom">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Honey Chilli Mashroom</div><div class="item-price">₹160</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Paneer">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Honey Chilli Mashroom</div><div class="item-price">₹160</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Honey Chilli Mashroom', 160)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="mushroom">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Mashroom</div><div class="item-price">₹170</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Paneer">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Mashroom</div><div class="item-price">₹170</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Masala Mashroom', 170)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="mushroom">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Paneer</div><div class="item-price">₹220</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Paneer">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Paneer</div><div class="item-price">₹220</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Chilli Paneer', 220)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="mushroom">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Paneer</div><div class="item-price">₹220</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Paneer">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Paneer</div><div class="item-price">₹220</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Masala Paneer', 220)">+ ADD</button>
         </div>
 
@@ -644,15 +923,26 @@
         <div class="section-title">🥣 Soup</div>
 
         <div class="menu-card" data-category="soup">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Soup</div><div class="item-price">₹60</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Soup">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Soup</div><div class="item-price">₹60</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Veg Soup', 60)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="soup">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Mancho Soup</div><div class="item-price">₹60</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Soup">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Mancho Soup</div><div class="item-price">₹60</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Veg Mancho Soup', 60)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="soup">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Sweet Corn Soup</div><div class="item-price">₹60</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Soup">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Sweet Corn Soup</div><div class="item-price">₹60</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Sweet Corn Soup', 60)">+ ADD</button>
         </div>
 
@@ -660,51 +950,93 @@
         <div class="section-title">🍚 Rice</div>
 
         <div class="menu-card" data-category="rice">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Fried Rice</div><div class="item-price">₹100</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Rice">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Fried Rice</div><div class="item-price">₹100</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Veg Fried Rice', 100)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="rice">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Jeera Rice</div><div class="item-price">₹90</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Rice">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Jeera Rice</div><div class="item-price">₹90</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Jeera Rice', 90)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="rice">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Schezwan Rice</div><div class="item-price">₹120</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Rice">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Schezwan Rice</div><div class="item-price">₹120</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Schezwan Rice', 120)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="rice">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Pulav Rice</div><div class="item-price">₹100</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Rice">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Pulav Rice</div><div class="item-price">₹100</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Veg Pulav Rice', 100)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="rice">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Fried Rice</div><div class="item-price">₹120</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Rice">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Fried Rice</div><div class="item-price">₹120</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Paneer Fried Rice', 120)">+ ADD</button>
         </div>
 
-        <!-- SAMOSA, ALOO TIKKI & PAKODA -->
-        <div class="section-title">🥟 Snacks (Samosa / Tikki / Pakoda)</div>
+        <!-- SNACKS -->
+        <div class="section-title">🥟 Snacks & Pakoda</div>
 
         <div class="menu-card" data-category="snacks">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Samosa</div><div class="item-price">₹40</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Samosa">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Samosa</div><div class="item-price">₹40</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Samosa', 40)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="snacks">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Samosa Paneer</div><div class="item-price">₹60</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Samosa">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Samosa Paneer</div><div class="item-price">₹60</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Samosa Paneer', 60)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="snacks">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Aloo Tikki</div><div class="item-price">₹40</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tikki">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Aloo Tikki</div><div class="item-price">₹40</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Aloo Tikki', 40)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="snacks">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Aloo Tikki Paneer</div><div class="item-price">₹60</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Tikki">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Aloo Tikki Paneer</div><div class="item-price">₹60</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Aloo Tikki Paneer', 60)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="snacks">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Simpel Pakoda (240 Kg)</div><div class="item-price">₹240</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Pakoda">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Simpel Pakoda (240 Kg)</div><div class="item-price">₹240</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Simpel Pakoda (240 Kg)', 240)">+ ADD</button>
         </div>
+
         <div class="menu-card" data-category="snacks">
-            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Pakoda (400 Kg)</div><div class="item-price">₹400</div></div>
+            <div class="item-left">
+                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=200&q=80" class="item-img" alt="Pakoda">
+                <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Pakoda (400 Kg)</div><div class="item-price">₹400</div></div>
+            </div>
             <button class="add-btn" onclick="addToCart('Paneer Pakoda (400 Kg)', 400)">+ ADD</button>
         </div>
 
@@ -723,8 +1055,8 @@
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
             <div class="cart-header">
-                <h3>Your Basket</h3>
-                <button onclick="closeCart()" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">✕</button>
+                <h3>Your Order Basket</h3>
+                <button onclick="closeCart()" style="background:none; border:none; font-size:1.3rem; cursor:pointer;">✕</button>
             </div>
 
             <div class="cart-items-list" id="cartItemsList"></div>
@@ -813,7 +1145,7 @@
                     <div class="cart-item">
                         <div>
                             <strong>${item}</strong><br>
-                            <small>₹${cart[item].price} x ${cart[item].qty} = ₹${cost}</small>
+                            <small style="color:#666;">₹${cart[item].price} x ${cart[item].qty} = ₹${cost}</small>
                         </div>
                         <div class="qty-controls">
                             <button class="qty-btn" onclick="updateQty('${item}', -1)">-</button>
