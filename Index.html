@@ -372,18 +372,18 @@
             display: none;
             text-align: center;
             margin: 15px 0;
-            padding: 12px;
-            background: #F9F9F9;
+            padding: 14px;
+            background: #FFF9F9;
             border-radius: 12px;
-            border: 1px dashed #CCCCCC;
+            border: 1.5px dashed var(--primary);
         }
 
         #qrContainer img {
-            width: 160px;
-            height: 160px;
+            width: 170px;
+            height: 170px;
             object-fit: contain;
             border-radius: 8px;
-            margin-top: 6px;
+            margin-top: 8px;
             background: #FFF;
             padding: 4px;
             border: 1px solid #EEE;
@@ -1097,13 +1097,14 @@
                 <label>Payment Method</label>
                 <select id="payMethod" onchange="togglePaymentQR(this.value)">
                     <option value="Pay at Counter">Pay at Counter</option>
-                    <option value="UPI / QR Code">UPI / QR Code</option>
+                    <option value="UPI / QR Code">UPI / QR Code (Paid Online)</option>
                 </select>
             </div>
 
             <!-- QR Code Display Box with Automatic Fallback -->
             <div id="qrContainer">
-                <p style="font-size: 0.8rem; font-weight: 600; color: #444;">Scan QR Code to Pay via UPI</p>
+                <p style="font-size: 0.82rem; font-weight: 700; color: #E63946;">📱 Scan & Pay via UPI</p>
+                <p style="font-size: 0.72rem; color: #555; margin-top: 2px;">Please complete your online payment first, then click the WhatsApp order button below.</p>
                 <!-- REPLACE 'qr.jpg' with your uploaded image filename if needed -->
                 <img id="qrImageElement" src="qr.jpg" alt="UPI QR Code" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=7051365318@paytm&pn=BamotraMomosCafe';">
             </div>
