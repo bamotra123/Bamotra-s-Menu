@@ -15,7 +15,6 @@
             --text-main: #2B2D42;
             --text-muted: #6C757D;
             --veg: #2B9348;
-            --nonveg: #D90429;
         }
 
         * {
@@ -45,8 +44,8 @@
 
         .hero-badge {
             display: inline-block;
-            background: rgba(230, 57, 70, 0.2);
-            color: #FF6B6B;
+            background: rgba(43, 147, 72, 0.2);
+            color: #52B788;
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
@@ -54,7 +53,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
-            border: 1px solid rgba(230, 57, 70, 0.3);
+            border: 1px solid rgba(43, 147, 72, 0.3);
         }
 
         .hero-header h1 {
@@ -120,7 +119,7 @@
         .section-title {
             font-size: 1.1rem;
             font-weight: 700;
-            margin: 16px 0 10px;
+            margin: 20px 0 10px;
             color: var(--dark);
         }
 
@@ -141,6 +140,7 @@
             padding-right: 12px;
         }
 
+        /* Pure Veg Indicator */
         .food-type {
             width: 14px;
             height: 14px;
@@ -149,13 +149,16 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 6px;
+            border: 1.5px solid var(--veg);
         }
 
-        .food-type.veg { border: 1.5px solid var(--veg); }
-        .food-type.veg::after { content: ''; width: 6px; height: 6px; background: var(--veg); border-radius: 50%; }
-
-        .food-type.nonveg { border: 1.5px solid var(--nonveg); }
-        .food-type.nonveg::after { content: ''; width: 6px; height: 6px; background: var(--nonveg); border-radius: 50%; }
+        .food-type::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--veg);
+            border-radius: 50%;
+        }
 
         .item-title {
             font-size: 0.95rem;
@@ -330,9 +333,9 @@
 
     <!-- Header -->
     <div class="hero-header">
-        <span class="hero-badge">Special Tandoori Momos</span>
+        <span class="hero-badge">🟢 100% PURE VEG CAFE</span>
         <h1>BAMOTRA MOMO'S CAFE</h1>
-        <p>Fresh, Hot & Smokey Flavors Delivered Fast</p>
+        <p>Special Tandoori Momos & Fast Food</p>
     </div>
 
     <!-- Category Filter Bar -->
@@ -341,6 +344,7 @@
             <button class="cat-btn active" onclick="filterMenu('all')">All Items</button>
             <button class="cat-btn" onclick="filterMenu('momos')">Momos 🥟</button>
             <button class="cat-btn" onclick="filterMenu('burgers')">Burgers 🍔</button>
+            <button class="cat-btn" onclick="filterMenu('chowmein')">Noodles 🍜</button>
             <button class="cat-btn" onclick="filterMenu('drinks')">Drinks 🥤</button>
         </div>
     </div>
@@ -348,45 +352,111 @@
     <!-- Menu List -->
     <div class="container">
         
-        <div class="section-title">Popular Choices</div>
+        <!-- MOMOS SECTION -->
+        <div class="section-title">🥟 Special Momos</div>
 
-        <!-- Item 1 -->
         <div class="menu-card" data-category="momos">
             <div class="item-details">
-                <div class="food-type veg"></div>
+                <div class="food-type"></div>
                 <div class="item-title">Steam Veg Momos</div>
-                <div class="item-desc">Fresh vegetables dumplings served with spicy chutney (8 Pcs)</div>
+                <div class="item-desc">Fresh vegetable dumplings with spicy chutney (8 Pcs)</div>
                 <div class="item-price">₹100</div>
             </div>
             <button class="add-btn" onclick="addToCart('Steam Veg Momos', 100)">+ ADD</button>
         </div>
 
-        <!-- Item 2 -->
         <div class="menu-card" data-category="momos">
             <div class="item-details">
-                <div class="food-type nonveg"></div>
-                <div class="item-title">Special Tandoori Chicken Momos</div>
-                <div class="item-desc">Chargrilled in tandoor with special smokey spices (8 Pcs)</div>
+                <div class="food-type"></div>
+                <div class="item-title">Fried Veg Momos</div>
+                <div class="item-desc">Crispy golden fried vegetable momos (8 Pcs)</div>
+                <div class="item-price">₹120</div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Fried Veg Momos', 120)">+ ADD</button>
+        </div>
+
+        <div class="menu-card" data-category="momos">
+            <div class="item-details">
+                <div class="food-type"></div>
+                <div class="item-title">Special Tandoori Veg Momos</div>
+                <div class="item-desc">Smokey tandoor roasted veg momos in spicy marinade (8 Pcs)</div>
                 <div class="item-price">₹150</div>
             </div>
-            <button class="add-btn" onclick="addToCart('Special Tandoori Chicken Momos', 150)">+ ADD</button>
+            <button class="add-btn" onclick="addToCart('Special Tandoori Veg Momos', 150)">+ ADD</button>
         </div>
 
-        <!-- Item 3 -->
+        <div class="menu-card" data-category="momos">
+            <div class="item-details">
+                <div class="food-type"></div>
+                <div class="item-title">Paneer Tandoori Momos</div>
+                <div class="item-desc">Rich paneer stuffed momos cooked in tandoor (8 Pcs)</div>
+                <div class="item-price">₹170</div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Paneer Tandoori Momos', 170)">+ ADD</button>
+        </div>
+
+        <div class="menu-card" data-category="momos">
+            <div class="item-details">
+                <div class="food-type"></div>
+                <div class="item-title">Afghani Malai Momos</div>
+                <div class="item-desc">Creamy & mild spicy cream glazed momos (8 Pcs)</div>
+                <div class="item-price">₹180</div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Afghani Malai Momos', 180)">+ ADD</button>
+        </div>
+
+        <!-- BURGERS SECTION -->
+        <div class="section-title">🍔 Crispy Burgers</div>
+
         <div class="menu-card" data-category="burgers">
             <div class="item-details">
-                <div class="food-type veg"></div>
-                <div class="item-title">Crispy Veg Burger</div>
-                <div class="item-desc">Loaded with crispy patty, veggies & secret mayo sauce</div>
+                <div class="food-type"></div>
+                <div class="item-title">Classic Veg Burger</div>
+                <div class="item-desc">Crispy patty with fresh veg & mayo</div>
                 <div class="item-price">₹60</div>
             </div>
-            <button class="add-btn" onclick="addToCart('Crispy Veg Burger', 60)">+ ADD</button>
+            <button class="add-btn" onclick="addToCart('Classic Veg Burger', 60)">+ ADD</button>
         </div>
 
-        <!-- Item 4 -->
+        <div class="menu-card" data-category="burgers">
+            <div class="item-details">
+                <div class="food-type"></div>
+                <div class="item-title">Cheese Veg Burger</div>
+                <div class="item-desc">Loaded with cheese slice & crunchy patty</div>
+                <div class="item-price">₹80</div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Cheese Veg Burger', 80)">+ ADD</button>
+        </div>
+
+        <!-- NOODLES / CHOWMEIN SECTION -->
+        <div class="section-title">🍜 Noodles & Fast Food</div>
+
+        <div class="menu-card" data-category="chowmein">
+            <div class="item-details">
+                <div class="food-type"></div>
+                <div class="item-title">Veg Chowmein</div>
+                <div class="item-desc">Stir-fried noodles tossed with fresh veggies</div>
+                <div class="item-price">₹90</div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Veg Chowmein', 90)">+ ADD</button>
+        </div>
+
+        <div class="menu-card" data-category="chowmein">
+            <div class="item-details">
+                <div class="food-type"></div>
+                <div class="item-title">Paneer Chowmein</div>
+                <div class="item-desc">Spicy noodles loaded with paneer cubes</div>
+                <div class="item-price">₹120</div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Paneer Chowmein', 120)">+ ADD</button>
+        </div>
+
+        <!-- DRINKS SECTION -->
+        <div class="section-title">🥤 Cold Beverages</div>
+
         <div class="menu-card" data-category="drinks">
             <div class="item-details">
-                <div class="food-type veg"></div>
+                <div class="food-type"></div>
                 <div class="item-title">Chilled Cold Drink</div>
                 <div class="item-desc">Refreshing 250ml beverage</div>
                 <div class="item-price">₹40</div>
