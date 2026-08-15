@@ -1184,12 +1184,6 @@
                 return;
             }
 
-            // Format customer phone number for direct WhatsApp replies
-            let cleanPhone = phone.replace(/[^0-9]/g, '');
-            if (cleanPhone.length === 10) {
-                cleanPhone = `91${cleanPhone}`;
-            }
-
             let grandTotal = 0;
             let orderItemsText = "";
             
@@ -1199,32 +1193,24 @@
                 orderItemsText += `• ${item} x ${cart[item].qty} = ₹${itemTotal}\n`;
             }
 
-            // Messages for One-Touch Cafe Confirmation
-            const confirmMsg = encodeURIComponent(`Hi ${name}, your order from Bamotra Momo's Cafe is CONFIRMED! 🟢\nEstimated prep time: 20-25 mins. Thank you!`);
-            const readyMsg = encodeURIComponent(`Hi ${name}, your order is READY! 🥟🔥 Please collect it / prepare for delivery. Enjoy!`);
+            // Clean, professional receipt formatted for the customer to send
+            let receiptText = `🧾 *NEW ORDER RECEIPT*\n`;
+            receiptText += `*BAMOTRA MOMO'S CAFE*\n`;
+            receiptText += `---------------------------\n`;
+            receiptText += `👤 *Customer Name:* ${name}\n`;
+            receiptText += `📞 *Phone:* ${phone}\n`;
+            receiptText += `💳 *Payment Method:* ${payMethod}\n`;
+            receiptText += `---------------------------\n`;
+            receiptText += `🛒 *ORDERED ITEMS:*\n`;
+            receiptText += orderItemsText;
+            receiptText += `---------------------------\n`;
+            receiptText += `💰 *TOTAL AMOUNT:* ₹${grandTotal}\n`;
+            receiptText += `---------------------------\n`;
+            receiptText += ` Please confirm my order and estimated time!`;
 
-            // Quick reply action links
-            const confirmLink = `https://wa.me/${cleanPhone}?text=${confirmMsg}`;
-            const readyLink = `https://wa.me/${cleanPhone}?text=${readyMsg}`;
-
-            let orderText = `📩 *NEW ORDER - BAMOTRA MOMO'S CAFE*\n`;
-            orderText += `---------------------------\n`;
-            orderText += `👤 *Customer:* ${name}\n`;
-            orderText += `📞 *Phone:* ${phone}\n`;
-            orderText += `💳 *Payment:* ${payMethod}\n`;
-            orderText += `---------------------------\n`;
-            orderText += `🛒 *Items Ordered:*\n`;
-            orderText += orderItemsText;
-            orderText += `---------------------------\n`;
-            orderText += `💰 *Total Amount:* ₹${grandTotal}\n`;
-            orderText += `---------------------------\n`;
-            orderText += `⚡ *ONE-TOUCH CAFE ACTIONS:*\n\n`;
-            orderText += `1️⃣ *Confirm Order (20-25 mins):*\n${confirmLink}\n\n`;
-            orderText += `2️⃣ *Order Ready Notification:*\n${readyLink}`;
-
-            // Cafe WhatsApp Number (Test: +44 7785112071)
+            // Cafe WhatsApp Number (+44 7785112071)
             const cafeWhatsAppNumber = "447785112071";
-            const encodedMessage = encodeURIComponent(orderText);
+            const encodedMessage = encodeURIComponent(receiptText);
             window.location.href = `https://wa.me/${cafeWhatsAppNumber}?text=${encodedMessage}`;
         }
     </script>
