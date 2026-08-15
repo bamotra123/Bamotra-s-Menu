@@ -127,7 +127,7 @@
             font-weight: 600;
             white-space: nowrap;
             cursor: pointer;
-            transition: all 0.25 ease;
+            transition: all 0.25s ease;
         }
 
         .cat-btn.active {
@@ -384,6 +384,9 @@
             object-fit: contain;
             border-radius: 8px;
             margin-top: 6px;
+            background: #FFF;
+            padding: 4px;
+            border: 1px solid #EEE;
         }
 
         .send-order-btn {
@@ -1098,11 +1101,11 @@
                 </select>
             </div>
 
-            <!-- QR Code Display Box -->
+            <!-- QR Code Display Box with Automatic Fallback -->
             <div id="qrContainer">
                 <p style="font-size: 0.8rem; font-weight: 600; color: #444;">Scan QR Code to Pay via UPI</p>
-                <!-- REPLACE 'your-qr-image.jpg' with your photo's exact file name or link hosted in your GitHub repository -->
-                <img src="your-qr-image.jpg" alt="UPI QR Code" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80'">
+                <!-- REPLACE 'qr.jpg' with your uploaded image filename if needed -->
+                <img id="qrImageElement" src="qr.jpg" alt="UPI QR Code" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=7051365318@paytm&pn=BamotraMomosCafe';">
             </div>
 
             <button class="send-order-btn" onclick="submitOrder()">Order on WhatsApp 📲</button>
@@ -1207,21 +1210,18 @@
             });
         }
 
-        // Logic for Daily Renewing Order Number (#001, #002...)
+        // Daily Renewing Order Number (#001, #002...)
         function getNextOrderNumber() {
-            const todayStr = new Date().toDateString(); // e.g. "Sat Aug 15 2026"
+            const todayStr = new Date().toDateString(); 
             let storedData = JSON.parse(localStorage.getItem('bamotra_daily_orders')) || { date: '', seq: 0 };
 
             if (storedData.date !== todayStr) {
-                // Reset sequence for a new day
                 storedData = { date: todayStr, seq: 1 };
             } else {
                 storedData.seq += 1;
             }
 
             localStorage.setItem('bamotra_daily_orders', JSON.stringify(storedData));
-            
-            // Format number to 3 digits like #001, #002
             return String(storedData.seq).padStart(3, '0');
         }
 
@@ -1238,7 +1238,7 @@
             const orderNo = getNextOrderNumber();
             const cafeWhatsAppNumber = "917051365318";
 
-            // Create pre-formatted quick confirmation & ready messages for owner's convenience
+            // Pre-formatted quick confirmation & ready messages for one-touch replies
             const confirmMsg = encodeURIComponent(`Hello ${name}, your order #${orderNo} at Bamotra Momo's Cafe has been CONFIRMED! 👨‍🍳✨`);
             const readyMsg = encodeURIComponent(`Hi ${name}, your order #${orderNo} is READY! Please collect it from the counter. 🍽️🎉`);
 
