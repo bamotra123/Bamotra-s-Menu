@@ -1174,6 +1174,26 @@
             });
         }
 
+        // Function to generate and auto-renew the daily order number
+        function getDailyOrderNumber() {
+            const today = new Date().toISOString().slice(0, 10); // Format: YYYY-MM-DD
+            let storedData = JSON.parse(localStorage.getItem('bamotra_order_seq')) || { date: '', count: 0 };
+
+            if (storedData.date !== today) {
+                // If the date has changed (next day), reset count to 1
+                storedData = { date: today, count: 1 };
+            } else {
+                // Same day, increase sequence by 1
+                storedData.count += 1;
+            }
+
+            localStorage.setItem('bamotra_order_seq', JSON.stringify(storedData));
+
+            // Format as a clean 3-digit number (e.g., 001, 002, etc.)
+            let orderNum = String(storedData.count).padStart(3, '0');
+            return orderNum;
+        }
+
         function submitOrder() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
@@ -1184,6 +1204,7 @@
                 return;
             }
 
+            let orderNo = getDailyOrderNumber();
             let grandTotal = 0;
             let orderItemsText = "";
             
@@ -1193,8 +1214,9 @@
                 orderItemsText += `• ${item} x ${cart[item].qty} = ₹${itemTotal}\n`;
             }
 
-            // Clean, professional receipt formatted for the customer to send
+            // Receipt containing the Order Number that both you and the customer will see
             let receiptText = `🧾 *NEW ORDER RECEIPT*\n`;
+            receiptText += `🔢 *Order No:* #${orderNo}\n`;
             receiptText += `*BAMOTRA MOMO'S CAFE*\n`;
             receiptText += `---------------------------\n`;
             receiptText += `👤 *Customer Name:* ${name}\n`;
@@ -1206,9 +1228,9 @@
             receiptText += `---------------------------\n`;
             receiptText += `💰 *TOTAL AMOUNT:* ₹${grandTotal}\n`;
             receiptText += `---------------------------\n`;
-            receiptText += ` Please confirm my order and estimated time!`;
+            receiptText += `Please confirm my order and estimated time!`;
 
-            // Cafe WhatsApp Number (+44 7785112071)
+            // Cafe WhatsApp Number
             const cafeWhatsAppNumber = "447785112071";
             const encodedMessage = encodeURIComponent(receiptText);
             window.location.href = `https://wa.me/${cafeWhatsAppNumber}?text=${encodedMessage}`;
