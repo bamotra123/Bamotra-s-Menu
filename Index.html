@@ -35,10 +35,10 @@
         .hero-header {
             background: linear-gradient(180deg, #000000 0%, #1A1A1A 100%);
             color: #FFFFFF;
-            padding: 30px 20px 25px;
+            padding: 25px 20px 20px;
             text-align: center;
-            border-bottom-left-radius: 24px;
-            border-bottom-right-radius: 24px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
@@ -57,7 +57,7 @@
         }
 
         .hero-header h1 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             color: #FFFFFF;
@@ -96,7 +96,7 @@
             border: none;
             padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
             white-space: nowrap;
             cursor: pointer;
@@ -121,17 +121,19 @@
             font-weight: 700;
             margin: 20px 0 10px;
             color: var(--dark);
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 4px;
         }
 
         .menu-card {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
             border: 1px solid #EAEAEA;
         }
 
@@ -142,49 +144,44 @@
 
         /* Pure Veg Indicator */
         .food-type {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             border-radius: 3px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             border: 1.5px solid var(--veg);
         }
 
         .food-type::after {
             content: '';
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background: var(--veg);
             border-radius: 50%;
         }
 
         .item-title {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 700;
             color: var(--dark);
         }
 
-        .item-desc {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            margin: 2px 0 6px;
-        }
-
         .item-price {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 700;
             color: var(--primary);
+            margin-top: 2px;
         }
 
         .add-btn {
             background: #FFF0F1;
             color: var(--primary);
             border: 1.5px solid var(--primary);
-            padding: 8px 18px;
-            border-radius: 10px;
-            font-size: 0.85rem;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 0.82rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -333,135 +330,382 @@
 
     <!-- Header -->
     <div class="hero-header">
-        <span class="hero-badge">🟢 100% PURE VEG CAFE</span>
+        <span class="hero-badge">🟢 100% PURE VEG</span>
         <h1>BAMOTRA MOMO'S CAFE</h1>
-        <p>Special Tandoori Momos & Fast Food</p>
+        <p>Good Food • Good Mood</p>
     </div>
 
     <!-- Category Filter Bar -->
     <div class="category-wrapper">
         <div class="category-scroll">
-            <button class="cat-btn active" onclick="filterMenu('all')">All Items</button>
-            <button class="cat-btn" onclick="filterMenu('momos')">Momos 🥟</button>
-            <button class="cat-btn" onclick="filterMenu('burgers')">Burgers 🍔</button>
-            <button class="cat-btn" onclick="filterMenu('chowmein')">Noodles 🍜</button>
-            <button class="cat-btn" onclick="filterMenu('drinks')">Drinks 🥤</button>
+            <button class="cat-btn active" onclick="filterMenu('all')">All</button>
+            <button class="cat-btn" onclick="filterMenu('veg-momo')">Veg Momos</button>
+            <button class="cat-btn" onclick="filterMenu('paneer-momo')">Paneer Momos</button>
+            <button class="cat-btn" onclick="filterMenu('noodles')">Noodles</button>
+            <button class="cat-btn" onclick="filterMenu('burger')">Burgers</button>
+            <button class="cat-btn" onclick="filterMenu('pasta')">Pasta</button>
+            <button class="cat-btn" onclick="filterMenu('fries')">Fries</button>
+            <button class="cat-btn" onclick="filterMenu('champ')">Champ</button>
+            <button class="cat-btn" onclick="filterMenu('tandoori-champ')">Tandoori Champ</button>
+            <button class="cat-btn" onclick="filterMenu('dosa')">Dosa</button>
+            <button class="cat-btn" onclick="filterMenu('sandwich')">Sandwich</button>
+            <button class="cat-btn" onclick="filterMenu('manchurian')">Manchurian</button>
+            <button class="cat-btn" onclick="filterMenu('mushroom')">Mushroom/Paneer</button>
+            <button class="cat-btn" onclick="filterMenu('soup')">Soup</button>
+            <button class="cat-btn" onclick="filterMenu('rice')">Rice</button>
+            <button class="cat-btn" onclick="filterMenu('snacks')">Samosa/Tikki/Pakoda</button>
         </div>
     </div>
 
     <!-- Menu List -->
     <div class="container">
-        
-        <!-- MOMOS SECTION -->
-        <div class="section-title">🥟 Special Momos</div>
 
-        <div class="menu-card" data-category="momos">
-            <div class="item-details">
-                <div class="food-type"></div>
-                <div class="item-title">Steam Veg Momos</div>
-                <div class="item-desc">Fresh vegetable dumplings with spicy chutney (8 Pcs)</div>
-                <div class="item-price">₹100</div>
-            </div>
-            <button class="add-btn" onclick="addToCart('Steam Veg Momos', 100)">+ ADD</button>
+        <!-- VEG MOMO -->
+        <div class="section-title">🥟 Special Veg Momos</div>
+
+        <div class="menu-card" data-category="veg-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Steam Veg Momo</div><div class="item-price">₹60</div></div>
+            <button class="add-btn" onclick="addToCart('Steam Veg Momo', 60)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="veg-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Fry Veg Momo</div><div class="item-price">₹70</div></div>
+            <button class="add-btn" onclick="addToCart('Fry Veg Momo', 70)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="veg-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Kurkure Veg Momo</div><div class="item-price">₹90</div></div>
+            <button class="add-btn" onclick="addToCart('Kurkure Veg Momo', 90)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="veg-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Veg Momo</div><div class="item-price">₹140</div></div>
+            <button class="add-btn" onclick="addToCart('Chilli Veg Momo', 140)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="veg-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Malai Veg Momo</div><div class="item-price">₹150</div></div>
+            <button class="add-btn" onclick="addToCart('Malai Veg Momo', 150)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="veg-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Veg Momo</div><div class="item-price">₹150</div></div>
+            <button class="add-btn" onclick="addToCart('Masala Veg Momo', 150)">+ ADD</button>
         </div>
 
-        <div class="menu-card" data-category="momos">
-            <div class="item-details">
-                <div class="food-type"></div>
-                <div class="item-title">Fried Veg Momos</div>
-                <div class="item-desc">Crispy golden fried vegetable momos (8 Pcs)</div>
-                <div class="item-price">₹120</div>
-            </div>
-            <button class="add-btn" onclick="addToCart('Fried Veg Momos', 120)">+ ADD</button>
+        <!-- PANEER MOMO -->
+        <div class="section-title">🥟 Special Paneer Momos</div>
+
+        <div class="menu-card" data-category="paneer-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Steam Paneer Momo</div><div class="item-price">₹80</div></div>
+            <button class="add-btn" onclick="addToCart('Steam Paneer Momo', 80)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="paneer-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Fry Paneer Momo</div><div class="item-price">₹90</div></div>
+            <button class="add-btn" onclick="addToCart('Fry Paneer Momo', 90)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="paneer-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Kurkure Paneer Momo</div><div class="item-price">₹110</div></div>
+            <button class="add-btn" onclick="addToCart('Kurkure Paneer Momo', 110)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="paneer-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Paneer Momo</div><div class="item-price">₹160</div></div>
+            <button class="add-btn" onclick="addToCart('Chilli Paneer Momo', 160)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="paneer-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Malai Paneer Momo</div><div class="item-price">₹160</div></div>
+            <button class="add-btn" onclick="addToCart('Malai Paneer Momo', 160)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="paneer-momo">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Paneer Momo</div><div class="item-price">₹160</div></div>
+            <button class="add-btn" onclick="addToCart('Masala Paneer Momo', 160)">+ ADD</button>
         </div>
 
-        <div class="menu-card" data-category="momos">
-            <div class="item-details">
-                <div class="food-type"></div>
-                <div class="item-title">Special Tandoori Veg Momos</div>
-                <div class="item-desc">Smokey tandoor roasted veg momos in spicy marinade (8 Pcs)</div>
-                <div class="item-price">₹150</div>
-            </div>
-            <button class="add-btn" onclick="addToCart('Special Tandoori Veg Momos', 150)">+ ADD</button>
+        <!-- NOODLES -->
+        <div class="section-title">🍜 Noodles</div>
+
+        <div class="menu-card" data-category="noodles">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Noodles</div><div class="item-price">₹80</div></div>
+            <button class="add-btn" onclick="addToCart('Veg Noodles', 80)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="noodles">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Hakka Noodles</div><div class="item-price">₹120</div></div>
+            <button class="add-btn" onclick="addToCart('Hakka Noodles', 120)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="noodles">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Garlic Noodles</div><div class="item-price">₹120</div></div>
+            <button class="add-btn" onclick="addToCart('Chilli Garlic Noodles', 120)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="noodles">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Singa Pori Noodles</div><div class="item-price">₹140</div></div>
+            <button class="add-btn" onclick="addToCart('Singa Pori Noodles', 140)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="noodles">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Schezwan Noodles</div><div class="item-price">₹150</div></div>
+            <button class="add-btn" onclick="addToCart('Schezwan Noodles', 150)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="noodles">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Noodles</div><div class="item-price">₹100</div></div>
+            <button class="add-btn" onclick="addToCart('Paneer Noodles', 100)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="noodles">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Spring Roll</div><div class="item-price">₹90</div></div>
+            <button class="add-btn" onclick="addToCart('Spring Roll', 90)">+ ADD</button>
         </div>
 
-        <div class="menu-card" data-category="momos">
-            <div class="item-details">
-                <div class="food-type"></div>
-                <div class="item-title">Paneer Tandoori Momos</div>
-                <div class="item-desc">Rich paneer stuffed momos cooked in tandoor (8 Pcs)</div>
-                <div class="item-price">₹170</div>
-            </div>
-            <button class="add-btn" onclick="addToCart('Paneer Tandoori Momos', 170)">+ ADD</button>
+        <!-- BURGER -->
+        <div class="section-title">🍔 Burger</div>
+
+        <div class="menu-card" data-category="burger">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Burger</div><div class="item-price">₹50</div></div>
+            <button class="add-btn" onclick="addToCart('Veg Burger', 50)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="burger">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Cheese Burger</div><div class="item-price">₹80</div></div>
+            <button class="add-btn" onclick="addToCart('Cheese Burger', 80)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="burger">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Sweet Corn Burger</div><div class="item-price">₹70</div></div>
+            <button class="add-btn" onclick="addToCart('Sweet Corn Burger', 70)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="burger">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Desi Style Burger</div><div class="item-price">₹60</div></div>
+            <button class="add-btn" onclick="addToCart('Desi Style Burger', 60)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="burger">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Cheese Paneer Burger</div><div class="item-price">₹100</div></div>
+            <button class="add-btn" onclick="addToCart('Cheese Paneer Burger', 100)">+ ADD</button>
         </div>
 
-        <div class="menu-card" data-category="momos">
-            <div class="item-details">
-                <div class="food-type"></div>
-                <div class="item-title">Afghani Malai Momos</div>
-                <div class="item-desc">Creamy & mild spicy cream glazed momos (8 Pcs)</div>
-                <div class="item-price">₹180</div>
-            </div>
-            <button class="add-btn" onclick="addToCart('Afghani Malai Momos', 180)">+ ADD</button>
+        <!-- PASTA -->
+        <div class="section-title">🍝 Pasta</div>
+
+        <div class="menu-card" data-category="pasta">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">White Sauce Pasta</div><div class="item-price">₹150</div></div>
+            <button class="add-btn" onclick="addToCart('White Sauce Pasta', 150)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="pasta">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Red Sauce Pasta</div><div class="item-price">₹170</div></div>
+            <button class="add-btn" onclick="addToCart('Red Sauce Pasta', 170)">+ ADD</button>
         </div>
 
-        <!-- BURGERS SECTION -->
-        <div class="section-title">🍔 Crispy Burgers</div>
+        <!-- FRIES -->
+        <div class="section-title">🍟 Fries</div>
 
-        <div class="menu-card" data-category="burgers">
-            <div class="item-details">
-                <div class="food-type"></div>
-                <div class="item-title">Classic Veg Burger</div>
-                <div class="item-desc">Crispy patty with fresh veg & mayo</div>
-                <div class="item-price">₹60</div>
-            </div>
-            <button class="add-btn" onclick="addToCart('Classic Veg Burger', 60)">+ ADD</button>
+        <div class="menu-card" data-category="fries">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">French Fries</div><div class="item-price">₹90</div></div>
+            <button class="add-btn" onclick="addToCart('French Fries', 90)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="fries">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Peri Peri Fries</div><div class="item-price">₹100</div></div>
+            <button class="add-btn" onclick="addToCart('Peri Peri Fries', 100)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="fries">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Potato</div><div class="item-price">₹140</div></div>
+            <button class="add-btn" onclick="addToCart('Chilli Potato', 140)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="fries">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Honey Chilli Potato</div><div class="item-price">₹120</div></div>
+            <button class="add-btn" onclick="addToCart('Honey Chilli Potato', 120)">+ ADD</button>
         </div>
 
-        <div class="menu-card" data-category="burgers">
-            <div class="item-details">
-                <div class="food-type"></div>
-                <div class="item-title">Cheese Veg Burger</div>
-                <div class="item-desc">Loaded with cheese slice & crunchy patty</div>
-                <div class="item-price">₹80</div>
-            </div>
-            <button class="add-btn" onclick="addToCart('Cheese Veg Burger', 80)">+ ADD</button>
+        <!-- MANCHURIAN -->
+        <div class="section-title">🧆 Manchurian</div>
+
+        <div class="menu-card" data-category="manchurian">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Manchurian Gravy</div><div class="item-price">₹150</div></div>
+            <button class="add-btn" onclick="addToCart('Veg Manchurian Gravy', 150)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="manchurian">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Manchurian Dry</div><div class="item-price">₹120</div></div>
+            <button class="add-btn" onclick="addToCart('Veg Manchurian Dry', 120)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="manchurian">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Manchurian</div><div class="item-price">₹180</div></div>
+            <button class="add-btn" onclick="addToCart('Paneer Manchurian', 180)">+ ADD</button>
         </div>
 
-        <!-- NOODLES / CHOWMEIN SECTION -->
-        <div class="section-title">🍜 Noodles & Fast Food</div>
+        <!-- CHAMP -->
+        <div class="section-title">🍲 Champ</div>
 
-        <div class="menu-card" data-category="chowmein">
-            <div class="item-details">
-                <div class="food-type"></div>
-                <div class="item-title">Veg Chowmein</div>
-                <div class="item-desc">Stir-fried noodles tossed with fresh veggies</div>
-                <div class="item-price">₹90</div>
-            </div>
-            <button class="add-btn" onclick="addToCart('Veg Chowmein', 90)">+ ADD</button>
+        <div class="menu-card" data-category="champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Champ</div><div class="item-price">₹90</div></div>
+            <button class="add-btn" onclick="addToCart('Veg Champ', 90)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Fry Malai Champ</div><div class="item-price">₹150</div></div>
+            <button class="add-btn" onclick="addToCart('Fry Malai Champ', 150)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Champ</div><div class="item-price">₹160</div></div>
+            <button class="add-btn" onclick="addToCart('Chilli Champ', 160)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Champ</div><div class="item-price">₹170</div></div>
+            <button class="add-btn" onclick="addToCart('Masala Champ', 170)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Honey Chilli Champ</div><div class="item-price">₹140</div></div>
+            <button class="add-btn" onclick="addToCart('Honey Chilli Champ', 140)">+ ADD</button>
         </div>
 
-        <div class="menu-card" data-category="chowmein">
-            <div class="item-details">
-                <div class="food-type"></div>
-                <div class="item-title">Paneer Chowmein</div>
-                <div class="item-desc">Spicy noodles loaded with paneer cubes</div>
-                <div class="item-price">₹120</div>
-            </div>
-            <button class="add-btn" onclick="addToCart('Paneer Chowmein', 120)">+ ADD</button>
+        <!-- TANDOORI CHAMP (4 PM) -->
+        <div class="section-title">🍢 Tandoori Champ (4 PM)</div>
+
+        <div class="menu-card" data-category="tandoori-champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Malai Champ</div><div class="item-price">₹170</div></div>
+            <button class="add-btn" onclick="addToCart('Malai Champ', 170)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="tandoori-champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Tandoori Champ</div><div class="item-price">₹140</div></div>
+            <button class="add-btn" onclick="addToCart('Tandoori Champ', 140)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="tandoori-champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Afghani Champ</div><div class="item-price">₹160</div></div>
+            <button class="add-btn" onclick="addToCart('Afghani Champ', 160)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="tandoori-champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Lemon Champ</div><div class="item-price">₹150</div></div>
+            <button class="add-btn" onclick="addToCart('Lemon Champ', 150)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="tandoori-champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Achari Champ</div><div class="item-price">₹150</div></div>
+            <button class="add-btn" onclick="addToCart('Achari Champ', 150)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="tandoori-champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Tikka</div><div class="item-price">₹200</div></div>
+            <button class="add-btn" onclick="addToCart('Paneer Tikka', 200)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="tandoori-champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Mashroom Tikka</div><div class="item-price">₹180</div></div>
+            <button class="add-btn" onclick="addToCart('Mashroom Tikka', 180)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="tandoori-champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg. Momo (Tandoori)</div><div class="item-price">₹150</div></div>
+            <button class="add-btn" onclick="addToCart('Veg. Momo (Tandoori)', 150)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="tandoori-champ">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Momo (Tandoori)</div><div class="item-price">₹170</div></div>
+            <button class="add-btn" onclick="addToCart('Paneer Momo (Tandoori)', 170)">+ ADD</button>
         </div>
 
-        <!-- DRINKS SECTION -->
-        <div class="section-title">🥤 Cold Beverages</div>
+        <!-- DOSA -->
+        <div class="section-title">🥞 Dosa</div>
 
-        <div class="menu-card" data-category="drinks">
-            <div class="item-details">
-                <div class="food-type"></div>
-                <div class="item-title">Chilled Cold Drink</div>
-                <div class="item-desc">Refreshing 250ml beverage</div>
-                <div class="item-price">₹40</div>
-            </div>
-            <button class="add-btn" onclick="addToCart('Chilled Cold Drink', 40)">+ ADD</button>
+        <div class="menu-card" data-category="dosa">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Dosa</div><div class="item-price">₹100</div></div>
+            <button class="add-btn" onclick="addToCart('Masala Dosa', 100)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="dosa">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Dosa</div><div class="item-price">₹130</div></div>
+            <button class="add-btn" onclick="addToCart('Paneer Dosa', 130)">+ ADD</button>
+        </div>
+
+        <!-- SANDWICH -->
+        <div class="section-title">🥪 Sandwich</div>
+
+        <div class="menu-card" data-category="sandwich">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Sandwich</div><div class="item-price">₹80</div></div>
+            <button class="add-btn" onclick="addToCart('Veg Sandwich', 80)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="sandwich">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Cheese Sandwich</div><div class="item-price">₹100</div></div>
+            <button class="add-btn" onclick="addToCart('Cheese Sandwich', 100)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="sandwich">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Sweet Corn Sandwich</div><div class="item-price">₹100</div></div>
+            <button class="add-btn" onclick="addToCart('Sweet Corn Sandwich', 100)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="sandwich">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Cheese Sandwich</div><div class="item-price">₹120</div></div>
+            <button class="add-btn" onclick="addToCart('Paneer Cheese Sandwich', 120)">+ ADD</button>
+        </div>
+
+        <!-- MUSHROOM & PANEER -->
+        <div class="section-title">🍄 Mushroom & Paneer</div>
+
+        <div class="menu-card" data-category="mushroom">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Mashroom</div><div class="item-price">₹180</div></div>
+            <button class="add-btn" onclick="addToCart('Chilli Mashroom', 180)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="mushroom">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Honey Chilli Mashroom</div><div class="item-price">₹160</div></div>
+            <button class="add-btn" onclick="addToCart('Honey Chilli Mashroom', 160)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="mushroom">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Mashroom</div><div class="item-price">₹170</div></div>
+            <button class="add-btn" onclick="addToCart('Masala Mashroom', 170)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="mushroom">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Chilli Paneer</div><div class="item-price">₹220</div></div>
+            <button class="add-btn" onclick="addToCart('Chilli Paneer', 220)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="mushroom">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Masala Paneer</div><div class="item-price">₹220</div></div>
+            <button class="add-btn" onclick="addToCart('Masala Paneer', 220)">+ ADD</button>
+        </div>
+
+        <!-- SOUP -->
+        <div class="section-title">🥣 Soup</div>
+
+        <div class="menu-card" data-category="soup">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Soup</div><div class="item-price">₹60</div></div>
+            <button class="add-btn" onclick="addToCart('Veg Soup', 60)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="soup">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Mancho Soup</div><div class="item-price">₹60</div></div>
+            <button class="add-btn" onclick="addToCart('Veg Mancho Soup', 60)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="soup">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Sweet Corn Soup</div><div class="item-price">₹60</div></div>
+            <button class="add-btn" onclick="addToCart('Sweet Corn Soup', 60)">+ ADD</button>
+        </div>
+
+        <!-- RICE -->
+        <div class="section-title">🍚 Rice</div>
+
+        <div class="menu-card" data-category="rice">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Fried Rice</div><div class="item-price">₹100</div></div>
+            <button class="add-btn" onclick="addToCart('Veg Fried Rice', 100)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="rice">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Jeera Rice</div><div class="item-price">₹90</div></div>
+            <button class="add-btn" onclick="addToCart('Jeera Rice', 90)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="rice">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Schezwan Rice</div><div class="item-price">₹120</div></div>
+            <button class="add-btn" onclick="addToCart('Schezwan Rice', 120)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="rice">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Veg Pulav Rice</div><div class="item-price">₹100</div></div>
+            <button class="add-btn" onclick="addToCart('Veg Pulav Rice', 100)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="rice">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Fried Rice</div><div class="item-price">₹120</div></div>
+            <button class="add-btn" onclick="addToCart('Paneer Fried Rice', 120)">+ ADD</button>
+        </div>
+
+        <!-- SAMOSA, ALOO TIKKI & PAKODA -->
+        <div class="section-title">🥟 Snacks (Samosa / Tikki / Pakoda)</div>
+
+        <div class="menu-card" data-category="snacks">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Samosa</div><div class="item-price">₹40</div></div>
+            <button class="add-btn" onclick="addToCart('Samosa', 40)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="snacks">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Samosa Paneer</div><div class="item-price">₹60</div></div>
+            <button class="add-btn" onclick="addToCart('Samosa Paneer', 60)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="snacks">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Aloo Tikki</div><div class="item-price">₹40</div></div>
+            <button class="add-btn" onclick="addToCart('Aloo Tikki', 40)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="snacks">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Aloo Tikki Paneer</div><div class="item-price">₹60</div></div>
+            <button class="add-btn" onclick="addToCart('Aloo Tikki Paneer', 60)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="snacks">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Simpel Pakoda (240 Kg)</div><div class="item-price">₹240</div></div>
+            <button class="add-btn" onclick="addToCart('Simpel Pakoda (240 Kg)', 240)">+ ADD</button>
+        </div>
+        <div class="menu-card" data-category="snacks">
+            <div class="item-details"><div class="food-type"></div><div class="item-title">Paneer Pakoda (400 Kg)</div><div class="item-price">₹400</div></div>
+            <button class="add-btn" onclick="addToCart('Paneer Pakoda (400 Kg)', 400)">+ ADD</button>
         </div>
 
     </div>
