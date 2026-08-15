@@ -367,7 +367,7 @@
             outline: none;
         }
 
-        /* UPI QR Code Container Styling */
+        /* UPI Payment App Launcher Container */
         #qrContainer {
             display: none;
             text-align: center;
@@ -378,15 +378,17 @@
             border: 1.5px dashed var(--primary);
         }
 
-        #qrContainer img {
-            width: 170px;
-            height: 170px;
-            object-fit: contain;
-            border-radius: 8px;
-            margin-top: 8px;
-            background: #FFF;
-            padding: 4px;
-            border: 1px solid #EEE;
+        .upi-app-btn {
+            display: inline-block;
+            background: #5A20CB;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(90,32,203,0.3);
         }
 
         .send-order-btn {
@@ -1097,16 +1099,15 @@
                 <label>Payment Method</label>
                 <select id="payMethod" onchange="togglePaymentQR(this.value)">
                     <option value="Pay at Counter">Pay at Counter</option>
-                    <option value="UPI / QR Code">UPI / QR Code (Paid Online)</option>
+                    <option value="UPI / QR Code">UPI / QR Code (Pay Online)</option>
                 </select>
             </div>
 
-            <!-- QR Code Display Box with Automatic Fallback -->
+            <!-- Direct UPI App Launcher Box -->
             <div id="qrContainer">
-                <p style="font-size: 0.82rem; font-weight: 700; color: #E63946;">📱 Scan & Pay via UPI</p>
-                <p style="font-size: 0.72rem; color: #555; margin-top: 2px;">Please complete your online payment first, then click the WhatsApp order button below.</p>
-                <!-- REPLACE 'qr.jpg' with your uploaded image filename if needed -->
-                <img id="qrImageElement" src="qr.jpg" alt="UPI QR Code" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=7051365318@paytm&pn=BamotraMomosCafe';">
+                <p style="font-size: 0.85rem; font-weight: 700; color: #E63946;">📱 Direct Online Payment</p>
+                <p style="font-size: 0.75rem; color: #555; margin-top: 4px;">Click the button below to pay directly through PhonePe, Paytm, or GPay, then return here to confirm order.</p>
+                <a id="upiPayLink" href="#" target="_blank" class="upi-app-btn">Pay Now via UPI App ⚡</a>
             </div>
 
             <button class="send-order-btn" onclick="submitOrder()">Order on WhatsApp 📲</button>
@@ -1167,9 +1168,22 @@
             const qrBox = document.getElementById('qrContainer');
             if (method === 'UPI / QR Code') {
                 qrBox.style.display = 'block';
+                updateUpiLink();
             } else {
                 qrBox.style.display = 'none';
             }
+        }
+
+        function updateUpiLink() {
+            let totalPrice = 0;
+            for (let item in cart) {
+                totalPrice += cart[item].qty * cart[item].price;
+            }
+            // Generate standard UPI Intent link
+            const upiId = "7051365318@paytm";
+            const payeeName = "BamotraMomosCafe";
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${totalPrice}&cu=INR`;
+            document.getElementById('upiPayLink').setAttribute('href', upiUrl);
         }
 
         function renderCartModal() {
@@ -1193,6 +1207,9 @@
                         </div>
                     </div>
                 `;
+            }
+            if(document.getElementById('payMethod').value === 'UPI / QR Code') {
+                updateUpiLink();
             }
         }
 
@@ -1236,18 +1253,28 @@
                 return;
             }
 
+            let paymentStatusTag = "🔴 Payment Pending";
+
+            if (payMethod === 'UPI / QR Code') {
+                let hasPaid = confirm("Did you successfully complete the online payment via your UPI app?\n\nClick [OK] if Payment is Done.\nClick [Cancel] if Payment is Pending.");
+                if (hasPaid) {
+                    paymentStatusTag = "🟢 Payment Done";
+                } else {
+                    paymentStatusTag = "🔴 Payment Pending";
+                }
+            } else {
+                paymentStatusTag = "🟡 Pay at Counter (Pending)";
+            }
+
             const orderNo = getNextOrderNumber();
             const cafeWhatsAppNumber = "917051365318";
-
-            // Pre-formatted quick confirmation & ready messages for one-touch replies
-            const confirmMsg = encodeURIComponent(`Hello ${name}, your order #${orderNo} at Bamotra Momo's Cafe has been CONFIRMED! 👨‍🍳✨`);
-            const readyMsg = encodeURIComponent(`Hi ${name}, your order #${orderNo} is READY! Please collect it from the counter. 🍽️🎉`);
 
             let orderText = `📩 *NEW ORDER - #${orderNo}*\n`;
             orderText += `---------------------------\n`;
             orderText += `👤 *Customer:* ${name}\n`;
             orderText += `📞 *Phone:* ${phone}\n`;
             orderText += `💳 *Payment:* ${payMethod}\n`;
+            orderText += `Status: *${paymentStatusTag}*\n`;
             orderText += `---------------------------\n`;
             orderText += `🛒 *Items Ordered:*\n`;
 
@@ -1259,10 +1286,7 @@
             }
 
             orderText += `---------------------------\n`;
-            orderText += `💰 *Total Amount:* ₹${grandTotal}\n\n`;
-            orderText += `--- *ONE-TOUCH STATUS REPLIES* ---\n`;
-            orderText += `✅ *Confirm Order:* \nwa.me/${phone}?text=${confirmMsg}\n\n`;
-            orderText += `📦 *Order Ready:* \nwa.me/${phone}?text=${readyMsg}`;
+            orderText += `💰 *Total Amount:* ₹${grandTotal}\n`;
 
             const encodedMessage = encodeURIComponent(orderText);
             window.location.href = `https://wa.me/${cafeWhatsAppNumber}?text=${encodedMessage}`;
