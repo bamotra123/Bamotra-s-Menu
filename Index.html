@@ -3,462 +3,561 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bamotra Momo’s Cafe - Online Order</title>
+    <title>Bamotra Momo's Cafe - Menu</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #e63946;
-            --dark: #1d3557;
-            --light: #f1faee;
-            --accent: #457b9d;
-            --success: #2a9d8f;
+            --primary: #E63946;
+            --dark: #111111;
+            --card-bg: #FFFFFF;
+            --bg: #F4F5F7;
+            --text-main: #2B2D42;
+            --text-muted: #6C757D;
+            --veg: #2B9348;
+            --nonveg: #D90429;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: var(--bg);
+            color: var(--text-main);
+            padding-bottom: 100px;
         }
 
-        header {
-            background-color: var(--primary);
-            color: white;
+        /* Hero Header */
+        .hero-header {
+            background: linear-gradient(180deg, #000000 0%, #1A1A1A 100%);
+            color: #FFFFFF;
+            padding: 30px 20px 25px;
             text-align: center;
-            padding: 20px 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
-        header h1 { margin: 0 0 5px 0; font-size: 26px; }
-        header p { margin: 3px 0; font-size: 14px; opacity: 0.9; }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(230, 57, 70, 0.2);
+            color: #FF6B6B;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(230, 57, 70, 0.3);
+        }
 
+        .hero-header h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #FFFFFF;
+        }
+
+        .hero-header p {
+            font-size: 0.85rem;
+            color: #CCCCCC;
+            margin-top: 4px;
+        }
+
+        /* Sticky Filter Bar */
+        .category-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            background: var(--bg);
+            padding: 12px 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        .category-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .category-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cat-btn {
+            background: #E2E8F0;
+            color: var(--text-main);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cat-btn.active {
+            background: var(--primary);
+            color: #FFFFFF;
+            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+        }
+
+        /* Container & Grid */
         .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 15px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+            padding: 10px 16px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        @media (min-width: 768px) {
-            .container { grid-template-columns: 2fr 1fr; }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 16px 0 10px;
+            color: var(--dark);
         }
 
-        .category-title {
-            background-color: var(--dark);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 6px;
-            margin-top: 20px;
-            font-size: 18px;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .item-card {
-            background: white;
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #EAEAEA;
         }
 
-        .item-name { font-weight: 600; font-size: 15px; }
-        .item-price { color: var(--primary); font-weight: bold; margin-top: 4px; }
+        .item-details {
+            flex: 1;
+            padding-right: 12px;
+        }
 
-        .btn-add {
-            background: var(--success);
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
+        .food-type {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+
+        .food-type.veg { border: 1.5px solid var(--veg); }
+        .food-type.veg::after { content: ''; width: 6px; height: 6px; background: var(--veg); border-radius: 50%; }
+
+        .food-type.nonveg { border: 1.5px solid var(--nonveg); }
+        .food-type.nonveg::after { content: ''; width: 6px; height: 6px; background: var(--nonveg); border-radius: 50%; }
+
+        .item-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .item-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin: 2px 0 6px;
+        }
+
+        .item-price {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .add-btn {
+            background: #FFF0F1;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
             cursor: pointer;
-            font-weight: bold;
+            transition: all 0.2s ease;
         }
 
-        /* Cart Section */
-        .cart-box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 20px;
-            height: fit-content;
+        .add-btn:active {
+            transform: scale(0.95);
+            background: var(--primary);
+            color: #FFFFFF;
         }
 
-        .cart-box h2 { margin-top: 0; color: var(--dark); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        /* Floating Basket Bar */
+        .basket-bar {
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            max-width: 568px;
+            margin: 0 auto;
+            background: var(--dark);
+            color: #FFFFFF;
+            padding: 12px 20px;
+            border-radius: 16px;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        .basket-info h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .basket-info p {
+            font-size: 0.75rem;
+            color: #AAAAAA;
+        }
+
+        .view-cart-btn {
+            background: var(--primary);
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Cart Overlay Drawer */
+        .cart-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: flex-end;
+            flex-direction: column;
+            z-index: 101;
+        }
+
+        .cart-content {
+            background: #FFFFFF;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            padding: 24px 20px 30px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #EEEEEE;
+            padding-bottom: 12px;
+        }
+
+        .cart-items-list {
+            margin-bottom: 16px;
+        }
 
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
-            font-size: 14px;
+            margin-bottom: 12px;
         }
 
-        .cart-controls button {
-            background: #e0e0e0;
-            border: none;
-            padding: 2px 8px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .total-row {
-            font-size: 18px;
-            font-weight: bold;
+        .qty-controls {
             display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            border-top: 2px solid #eee;
-            padding-top: 10px;
+            align-items: center;
+            gap: 10px;
+            background: #F1F3F5;
+            padding: 4px 10px;
+            border-radius: 8px;
         }
 
-        .form-group {
-            margin-top: 12px;
+        .qty-btn {
+            background: none;
+            border: none;
+            font-weight: 800;
+            font-size: 1rem;
+            color: var(--dark);
+            cursor: pointer;
         }
 
-        .form-group label {
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-group label {
             display: block;
-            font-size: 13px;
-            margin-bottom: 4px;
+            font-size: 0.78rem;
             font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-muted);
         }
 
-        .form-group input, .form-group select {
+        .input-group input, .input-group select {
             width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .qr-container {
-            display: none;
-            text-align: center;
-            margin-top: 10px;
             padding: 10px;
-            background: #f1f1f1;
-            border-radius: 6px;
+            border-radius: 8px;
+            border: 1px solid #DDDDDD;
+            font-size: 0.88rem;
+            outline: none;
         }
 
-        .qr-container img { max-width: 180px; height: auto; border-radius: 6px; }
-
-        .btn-order {
+        .send-order-btn {
             width: 100%;
             background: #25D366;
-            color: white;
+            color: #FFFFFF;
             border: none;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 6px;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 15px;
-        }
-
-        /* Modal / Receipt Styling */
-        .modal {
-            display: none;
-            position: fixed;
-            top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.6);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .receipt-header { text-align: center; border-bottom: 1px dashed #aaa; padding-bottom: 10px; }
-        .receipt-body { margin: 15px 0; }
-        .receipt-line { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 5px; }
-
-        .btn-close {
-            background: var(--dark);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            width: 100%;
             margin-top: 10px;
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: var(--dark);
-            color: white;
-            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Bamotra Momo’s Cafe</h1>
-        <p>Main Bazar | Vijaypur | Opp. Petrol Pump | NH.44</p>
-        <p>Mob.: 7051365318, 9596373656, 9697201688</p>
-    </header>
+    <!-- Header -->
+    <div class="hero-header">
+        <span class="hero-badge">Special Tandoori Momos</span>
+        <h1>BAMOTRA MOMO'S CAFE</h1>
+        <p>Fresh, Hot & Smokey Flavors Delivered Fast</p>
+    </div>
 
+    <!-- Category Filter Bar -->
+    <div class="category-wrapper">
+        <div class="category-scroll">
+            <button class="cat-btn active" onclick="filterMenu('all')">All Items</button>
+            <button class="cat-btn" onclick="filterMenu('momos')">Momos 🥟</button>
+            <button class="cat-btn" onclick="filterMenu('burgers')">Burgers 🍔</button>
+            <button class="cat-btn" onclick="filterMenu('drinks')">Drinks 🥤</button>
+        </div>
+    </div>
+
+    <!-- Menu List -->
     <div class="container">
-        <!-- Menu Section -->
-        <div>
-            <div class="category-title">Special Veg Momo</div>
-            <div class="menu-grid">
-                <div class="item-card"><div><div class="item-name">Steam Momo</div><div class="item-price">₹60</div></div><button class="btn-add" onclick="addToCart('Steam Momo', 60)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Fry Momo</div><div class="item-price">₹70</div></div><button class="btn-add" onclick="addToCart('Fry Momo', 70)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Kurkure Momo</div><div class="item-price">₹90</div></div><button class="btn-add" onclick="addToCart('Kurkure Momo', 90)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Chilli Momo</div><div class="item-price">₹140</div></div><button class="btn-add" onclick="addToCart('Chilli Momo', 140)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Malai Momo</div><div class="item-price">₹150</div></div><button class="btn-add" onclick="addToCart('Malai Momo', 150)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Masala Momo</div><div class="item-price">₹150</div></div><button class="btn-add" onclick="addToCart('Masala Momo', 150)">+ Add</button></div>
-            </div>
+        
+        <div class="section-title">Popular Choices</div>
 
-            <div class="category-title">Special Paneer Momo</div>
-            <div class="menu-grid">
-                <div class="item-card"><div><div class="item-name">Steam Momo (P)</div><div class="item-price">₹80</div></div><button class="btn-add" onclick="addToCart('Steam Momo (P)', 80)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Fry Momo (P)</div><div class="item-price">₹90</div></div><button class="btn-add" onclick="addToCart('Fry Momo (P)', 90)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Kurkure Momo (P)</div><div class="item-price">₹110</div></div><button class="btn-add" onclick="addToCart('Kurkure Momo (P)', 110)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Chilli Momo (P)</div><div class="item-price">₹160</div></div><button class="btn-add" onclick="addToCart('Chilli Momo (P)', 160)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Malai Momo (P)</div><div class="item-price">₹160</div></div><button class="btn-add" onclick="addToCart('Malai Momo (P)', 160)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Masala Momo (P)</div><div class="item-price">₹160</div></div><button class="btn-add" onclick="addToCart('Masala Momo (P)', 160)">+ Add</button></div>
+        <!-- Item 1 -->
+        <div class="menu-card" data-category="momos">
+            <div class="item-details">
+                <div class="food-type veg"></div>
+                <div class="item-title">Steam Veg Momos</div>
+                <div class="item-desc">Fresh vegetables dumplings served with spicy chutney (8 Pcs)</div>
+                <div class="item-price">₹100</div>
             </div>
-
-            <div class="category-title">Burger & Snacks</div>
-            <div class="menu-grid">
-                <div class="item-card"><div><div class="item-name">Veg Burger</div><div class="item-price">₹50</div></div><button class="btn-add" onclick="addToCart('Veg Burger', 50)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Cheese Burger</div><div class="item-price">₹80</div></div><button class="btn-add" onclick="addToCart('Cheese Burger', 80)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">French Fries</div><div class="item-price">₹90</div></div><button class="btn-add" onclick="addToCart('French Fries', 90)">+ Add</button></div>
-                <div class="item-card"><div><div class="item-name">Peri Peri Fries</div><div class="item-price">₹100</div></div><button class="btn-add" onclick="addToCart('Peri Peri Fries', 100)">+ Add</button></div>
-            </div>
+            <button class="add-btn" onclick="addToCart('Steam Veg Momos', 100)">+ ADD</button>
         </div>
 
-        <!-- Cart Section -->
-        <div>
-            <div class="cart-box">
-                <h2>Your Basket</h2>
-                <div id="cart-items"><p style="color:#777;">Your cart is empty.</p></div>
-                
-                <div class="total-row">
-                    <span>Total:</span>
-                    <span>₹<span id="cart-total">0</span></span>
-                </div>
-
-                <div class="form-group">
-                    <label>Customer Name *</label>
-                    <input type="text" id="cust-name" placeholder="Enter your name" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Mobile Number *</label>
-                    <input type="tel" id="cust-phone" placeholder="Enter phone number" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Payment Method</label>
-                    <select id="payment-method" onchange="togglePayment(this.value)">
-                        <option value="Pay at Counter">Pay at Counter</option>
-                        <option value="UPI / QR Code">Scan QR & Pay Online</option>
-                    </select>
-                </div>
-
-                <!-- QR Placeholder -->
-                <div class="qr-container" id="qr-box">
-                    <p style="font-size:12px; margin: 0 0 5px 0;">Scan using GPay / PhonePe / Paytm</p>
-                    <p style="font-size:13px; color:#555; border:1px dashed #999; padding:15px; margin:5px 0; background:#fff;">
-                        📱 QR Code photo will be uploaded soon.<br>Please pay at counter or ask for QR code!
-                    </p>
-                </div>
-
-                <button class="btn-order" onclick="placeOrder()">Order on WhatsApp 📲</button>
+        <!-- Item 2 -->
+        <div class="menu-card" data-category="momos">
+            <div class="item-details">
+                <div class="food-type nonveg"></div>
+                <div class="item-title">Special Tandoori Chicken Momos</div>
+                <div class="item-desc">Chargrilled in tandoor with special smokey spices (8 Pcs)</div>
+                <div class="item-price">₹150</div>
             </div>
+            <button class="add-btn" onclick="addToCart('Special Tandoori Chicken Momos', 150)">+ ADD</button>
         </div>
+
+        <!-- Item 3 -->
+        <div class="menu-card" data-category="burgers">
+            <div class="item-details">
+                <div class="food-type veg"></div>
+                <div class="item-title">Crispy Veg Burger</div>
+                <div class="item-desc">Loaded with crispy patty, veggies & secret mayo sauce</div>
+                <div class="item-price">₹60</div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Crispy Veg Burger', 60)">+ ADD</button>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="menu-card" data-category="drinks">
+            <div class="item-details">
+                <div class="food-type veg"></div>
+                <div class="item-title">Chilled Cold Drink</div>
+                <div class="item-desc">Refreshing 250ml beverage</div>
+                <div class="item-price">₹40</div>
+            </div>
+            <button class="add-btn" onclick="addToCart('Chilled Cold Drink', 40)">+ ADD</button>
+        </div>
+
     </div>
 
-    <!-- Receipt Modal Popup -->
-    <div class="modal" id="receipt-modal">
-        <div class="modal-content">
-            <div class="receipt-header">
-                <h3 style="margin:0;">Bamotra Momo’s Cafe</h3>
-                <p style="margin:2px 0; font-size:12px;">Vijaypur | Mob: 7051365318</p>
-                <h4 id="rec-order-id" style="margin:10px 0 0 0; color:var(--primary);">Order #ORD-101</h4>
-                <p id="rec-date" style="font-size:11px; color:#666; margin:0;"></p>
-            </div>
-            <div class="receipt-body">
-                <p><strong>Customer:</strong> <span id="rec-name"></span> (<span id="rec-phone"></span>)</p>
-                <div id="rec-items-list" style="border-bottom: 1px dashed #aaa; padding-bottom: 8px; margin-bottom: 8px;"></div>
-                <div class="receipt-line"><strong>Total Amount:</strong> <strong>₹<span id="rec-total"></span></strong></div>
-                <div class="receipt-line"><span>Payment:</span> <span id="rec-payment"></span></div>
-            </div>
-            <button class="btn-close" onclick="closeReceipt()">Close Receipt</button>
+    <!-- Floating Basket Bar -->
+    <div class="basket-bar" id="basketBar">
+        <div class="basket-info">
+            <h4 id="basketCount">0 Items</h4>
+            <p id="basketTotal">Total: ₹0</p>
         </div>
+        <button class="view-cart-btn" onclick="openCart()">View Basket 🛒</button>
     </div>
 
-    <footer>
-        Thank You! Visit Again<br>
-        Bamotra Momo’s Cafe - Vijaypur
-    </footer>
+    <!-- Cart Overlay Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Your Basket</h3>
+                <button onclick="closeCart()" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">✕</button>
+            </div>
+
+            <div class="cart-items-list" id="cartItemsList"></div>
+
+            <div class="input-group">
+                <label>Your Name</label>
+                <input type="text" id="custName" placeholder="Enter your full name">
+            </div>
+
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="tel" id="custPhone" placeholder="Enter phone number">
+            </div>
+
+            <div class="input-group">
+                <label>Payment Method</label>
+                <select id="payMethod">
+                    <option value="Pay at Counter">Pay at Counter</option>
+                    <option value="UPI / QR Code">UPI / QR Code</option>
+                </select>
+            </div>
+
+            <button class="send-order-btn" onclick="submitOrder()">Order on WhatsApp 📲</button>
+        </div>
+    </div>
 
     <script>
-        let cart = [];
-        // Direct WhatsApp Number (Country code 91 + 7051365318)
-        const RESTAURANT_WHATSAPP = "917051365318"; 
+        let cart = {};
 
         function addToCart(name, price) {
-            const existing = cart.find(item => item.name === name);
-            if (existing) {
-                existing.qty += 1;
+            if (cart[name]) {
+                cart[name].qty += 1;
             } else {
-                cart.push({ name, price, qty: 1 });
+                cart[name] = { price: price, qty: 1 };
             }
-            updateCartUI();
+            updateBasketBar();
         }
 
-        function changeQty(name, delta) {
-            const item = cart.find(i => i.name === name);
-            if (item) {
-                item.qty += delta;
-                if (item.qty <= 0) {
-                    cart = cart.filter(i => i.name !== name);
-                }
+        function updateQty(name, change) {
+            if (cart[name]) {
+                cart[name].qty += change;
+                if (cart[name].qty <= 0) delete cart[name];
             }
-            updateCartUI();
+            updateBasketBar();
+            renderCartModal();
         }
 
-        function updateCartUI() {
-            const cartContainer = document.getElementById('cart-items');
-            const totalEl = document.getElementById('cart-total');
-            
-            if (cart.length === 0) {
-                cartContainer.innerHTML = '<p style="color:#777;">Your cart is empty.</p>';
-                totalEl.innerText = '0';
-                return;
+        function updateBasketBar() {
+            let totalItems = 0;
+            let totalPrice = 0;
+
+            for (let item in cart) {
+                totalItems += cart[item].qty;
+                totalPrice += cart[item].qty * cart[item].price;
             }
 
-            let html = '';
-            let total = 0;
+            const basketBar = document.getElementById('basketBar');
+            if (totalItems > 0) {
+                basketBar.style.display = 'flex';
+                document.getElementById('basketCount').innerText = `${totalItems} ${totalItems === 1 ? 'Item' : 'Items'}`;
+                document.getElementById('basketTotal').innerText = `Total: ₹${totalPrice}`;
+            } else {
+                basketBar.style.display = 'none';
+                closeCart();
+            }
+        }
 
-            cart.forEach(item => {
-                const itemTotal = item.price * item.qty;
-                total += itemTotal;
-                html += `
+        function openCart() {
+            renderCartModal();
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function renderCartModal() {
+            const list = document.getElementById('cartItemsList');
+            list.innerHTML = '';
+            let totalPrice = 0;
+
+            for (let item in cart) {
+                let cost = cart[item].qty * cart[item].price;
+                totalPrice += cost;
+                list.innerHTML += `
                     <div class="cart-item">
                         <div>
-                            <div><strong>${item.name}</strong></div>
-                            <div style="font-size:12px; color:#666;">₹${item.price} x ${item.qty} = ₹${itemTotal}</div>
+                            <strong>${item}</strong><br>
+                            <small>₹${cart[item].price} x ${cart[item].qty} = ₹${cost}</small>
                         </div>
-                        <div class="cart-controls">
-                            <button onclick="changeQty('${item.name}', -1)">-</button>
-                            <span>${item.qty}</span>
-                            <button onclick="changeQty('${item.name}', 1)">+</button>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQty('${item}', -1)">-</button>
+                            <span>${cart[item].qty}</span>
+                            <button class="qty-btn" onclick="updateQty('${item}', 1)">+</button>
                         </div>
                     </div>
                 `;
+            }
+        }
+
+        function filterMenu(category) {
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.menu-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
             });
-
-            cartContainer.innerHTML = html;
-            totalEl.innerText = total;
         }
 
-        function togglePayment(val) {
-            document.getElementById('qr-box').style.display = (val === 'UPI / QR Code') ? 'block' : 'none';
-        }
-
-        // Daily Reset Order Sequence Logic
-        function getNextOrderNumber() {
-            const today = new Date().toISOString().slice(0, 10);
-            const storedDate = localStorage.getItem('last_order_date');
-            let orderSeq = parseInt(localStorage.getItem('order_sequence') || '100');
-
-            if (storedDate !== today) {
-                orderSeq = 101;
-                localStorage.setItem('last_order_date', today);
-            } else {
-                orderSeq += 1;
-            }
-
-            localStorage.setItem('order_sequence', orderSeq.toString());
-            return `ORD-${orderSeq}`;
-        }
-
-        function placeOrder() {
-            if (cart.length === 0) {
-                alert("Please add items to your cart first!");
-                return;
-            }
-
-            const name = document.getElementById('cust-name').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
-            const payment = document.getElementById('payment-method').value;
+        function submitOrder() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const payMethod = document.getElementById('payMethod').value;
 
             if (!name || !phone) {
-                alert("Please enter your Name and Mobile Number!");
+                alert('Please fill in your Name and Phone Number.');
                 return;
             }
 
-            const orderId = getNextOrderNumber();
-            const total = document.getElementById('cart-total').innerText;
-            const orderDate = new Date().toLocaleString();
+            let orderText = `📩 *NEW ORDER - BAMOTRA MOMO'S CAFE*\n`;
+            orderText += `---------------------------\n`;
+            orderText += `👤 *Customer:* ${name}\n`;
+            orderText += `📞 *Phone:* ${phone}\n`;
+            orderText += `💳 *Payment:* ${payMethod}\n`;
+            orderText += `---------------------------\n`;
+            orderText += `🛒 *Items Ordered:*\n`;
 
-            // Formatted WhatsApp Message
-            let waText = `*NEW ORDER - ${orderId}*\n`;
-            waText += `---------------------------\n`;
-            waText += `*Customer:* ${name}\n`;
-            waText += `*Phone:* ${phone}\n`;
-            waText += `*Payment:* ${payment}\n`;
-            waText += `---------------------------\n`;
-            waText += `*Items Ordered:*\n`;
+            let grandTotal = 0;
+            for (let item in cart) {
+                let itemTotal = cart[item].qty * cart[item].price;
+                grandTotal += itemTotal;
+                orderText += `• ${item} x ${cart[item].qty} = ₹${itemTotal}\n`;
+            }
 
-            let receiptItemsHtml = '';
-            cart.forEach((item, index) => {
-                waText += `${index + 1}. ${item.name} x ${item.qty} = ₹${item.price * item.qty}\n`;
-                receiptItemsHtml += `<div class="receipt-line"><span>${item.name} x ${item.qty}</span><span>₹${item.price * item.qty}</span></div>`;
-            });
+            orderText += `---------------------------\n`;
+            orderText += `💰 *Total Amount:* ₹${grandTotal}\n\n`;
+            orderText += `*Please accept & confirm order processing time!*`;
 
-            waText += `---------------------------\n`;
-            waText += `*Total Amount:* ₹${total}\n\n`;
-            waText += `Please accept & confirm order processing time!`;
-
-            const waUrl = `https://wa.me/${RESTAURANT_WHATSAPP}?text=${encodeURIComponent(waText)}`;
-
-            // Render Digital Receipt
-            document.getElementById('rec-order-id').innerText = orderId;
-            document.getElementById('rec-date').innerText = orderDate;
-            document.getElementById('rec-name').innerText = name;
-            document.getElementById('rec-phone').innerText = phone;
-            document.getElementById('rec-total').innerText = total;
-            document.getElementById('rec-payment').innerText = payment;
-            document.getElementById('rec-items-list').innerHTML = receiptItemsHtml;
-
-            document.getElementById('receipt-modal').style.display = 'flex';
-
-            window.open(waUrl, '_blank');
-        }
-
-        function closeReceipt() {
-            document.getElementById('receipt-modal').style.display = 'none';
-            cart = [];
-            updateCartUI();
-            document.getElementById('cust-name').value = '';
-            document.getElementById('cust-phone').value = '';
+            const cafeWhatsAppNumber = "917051365318";
+            const encodedMessage = encodeURIComponent(orderText);
+            window.location.href = `https://wa.me/${cafeWhatsAppNumber}?text=${encodedMessage}`;
         }
     </script>
 </body>
